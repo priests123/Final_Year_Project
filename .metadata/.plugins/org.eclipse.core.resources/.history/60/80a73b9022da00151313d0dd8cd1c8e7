@@ -1,0 +1,39 @@
+package RailData;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class calculateStats {
+
+	public static String printMinMax(ArrayList<ArrayList<Object>> routeDetails, String operator, int count) {
+		long minMaxTime = 0;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		for (int m = 1; m < routeDetails.get(count).size(); m = m + 3) 
+		{
+			try 
+			{
+				Date time = dateFormat.parse(routeDetails.get(count).get(m).toString());
+				long timeInMilSec = time.getTime();
+				if (m == 1) 
+				{
+					minMaxTime = timeInMilSec;
+				}
+				if (operator == "min") 
+				{
+					if (timeInMilSec < minMaxTime) 
+					{
+						minMaxTime = timeInMilSec;
+					}
+				} else if (operator == "max") {
+					if (timeInMilSec > minMaxTime) 
+					{
+						minMaxTime = timeInMilSec;
+					}
+				}
+			} catch (ParseException e) {}
+		}
+		return dateFormat.format(minMaxTime);
+	}
+}

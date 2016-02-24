@@ -1,0 +1,49 @@
+package RailData;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class ReadInFile {
+	
+	//TAKES A FILE LOCATION OF CSV AND INSERTS EACH LINE INTO AN ARRAYLIST CALLED RAWDATA
+	
+	public static ArrayList<ArrayList<String>> readInCSV(String fileLocation){
+		BufferedReader rawFile = null;
+		String rawFileLine = null;
+		ArrayList<ArrayList<String>> rawData = new ArrayList<ArrayList<String>>();	
+		try {
+			rawFile = new BufferedReader(new FileReader(fileLocation));
+			while ((rawFileLine = rawFile.readLine()) != null) {
+				rawData.add(converttoArrayList(rawFileLine));
+			}
+		} catch (IOException e) {
+			System.out.println("File does not exist");
+		} finally {
+			try {
+				if (rawFile != null)
+					rawFile.close();
+			} catch (IOException e) {
+				System.out.println("Can't close the file");
+			}
+		}
+		return rawData;
+		
+	}
+	
+	//
+	
+	public static ArrayList<String> converttoArrayList(String rawLine) {
+		ArrayList<String> lineData = new ArrayList<String>();
+		if (rawLine != null) {
+			String[] splitData = rawLine.split("\\s*,\\s*"); // Regular expression to split CSV
+			for (int b = 0; b < splitData.length; b++) {
+				if ((splitData[b] != null) || (splitData[b].length() != 0)) {
+					lineData.add(splitData[b].trim());
+				}
+			}
+		}
+		return lineData;
+	}
+}

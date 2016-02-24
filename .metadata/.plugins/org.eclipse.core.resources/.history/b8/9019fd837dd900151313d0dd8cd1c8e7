@@ -1,0 +1,16 @@
+package RailData;
+
+import java.util.ArrayList;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		String fileLcoation = "C:\\Users\\Michael\\Desktop\\Spark\\DataSets\\465245-weekly-routes.txt";
+		ArrayList<ArrayList<String>> railData = ReadInFile.readInCSV(fileLcoation);
+		//System.out.print(railData);
+		//TimeBetweenStations.timeBetween(railData);
+		System.out.print(RailDataToRoute.convertRailDataToRoutes(railData));
+	}
+
+}

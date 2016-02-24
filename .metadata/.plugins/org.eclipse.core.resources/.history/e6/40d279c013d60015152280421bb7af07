@@ -1,0 +1,12 @@
+package RailData;
+
+import java.io.BufferedReader;
+import java.util.ArrayList;
+
+public class ReadInFile {
+
+	public void readInCSV(String fileLocation){
+		BufferedReader rawFile = null;
+		ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
+	}
+}

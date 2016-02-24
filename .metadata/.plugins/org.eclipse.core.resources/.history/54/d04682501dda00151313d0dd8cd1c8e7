@@ -1,0 +1,12 @@
+package RailData;
+
+import java.util.ArrayList;
+
+public class RouteStastics {
+	
+	public static void generateStastics(ArrayList<ArrayList<Object>> allRoutes)
+	{
+		ArrayList<ArrayList<Object>> routesStastics = new ArrayList<ArrayList<Object>>();
+	}
+	
+}

@@ -1,0 +1,14 @@
+package RailData;
+
+import java.util.ArrayList;
+
+public class RailDataToRoute {
+
+	public static ArrayList<ArrayList<Object>> convertRailDataToRoutes(ArrayList<ArrayList<String>> railData){
+		
+		
+		
+		
+		return null;
+	}
+}

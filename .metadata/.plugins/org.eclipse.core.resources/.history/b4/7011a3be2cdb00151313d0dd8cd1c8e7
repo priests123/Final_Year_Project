@@ -1,0 +1,10 @@
+package RailData;
+
+public class PrintOut {
+	
+	public static void printRouteStatistics()
+	{
+		
+	}
+	
+}
