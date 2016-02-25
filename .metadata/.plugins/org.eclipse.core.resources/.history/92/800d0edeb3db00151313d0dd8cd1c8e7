@@ -43,6 +43,11 @@ public class OffOnPeakStats {
 		}
 		}catch(IndexOutOfBoundsException e){}
 		
+		//System.out.println(onPeakTotalTime);
+		for (int b = 2; b < routeStasticsData.get(count).size(); b = b + 3) {
+		
+		}
+		
 		
 		long offAverage = 0;
 		long onAverage = 0;
@@ -71,10 +76,13 @@ public class OffOnPeakStats {
 			}
 		}
 		
-		if(averageOffPeakTime.equals(averageOnPeakTime)){
-			offOnDiff = "0.0";
-		}else if(diffBetweenOffOn == 0){
+		System.out.println("AverageOff " + averageOffPeakTime);
+		System.out.println("AverageOn " + averageOnPeakTime);
+		
+		if(diffBetweenOffOn == 0)
 			offOnDiff = "N/A";
+		else if(averageOffPeakTime == averageOnPeakTime){
+			offOnDiff = "0.0";
 		}else{
 			offOnDiff = String.format("%.1f",diffBetweenOffOn); 
 		}

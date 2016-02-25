@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 public class OffOnPeakStats {
 
@@ -43,6 +42,11 @@ public class OffOnPeakStats {
 		}
 		}catch(IndexOutOfBoundsException e){}
 		
+		//System.out.println(onPeakTotalTime);
+		for (int b = 2; b < routeStasticsData.get(count).size(); b = b + 3) {
+		
+		}
+		
 		
 		long offAverage = 0;
 		long onAverage = 0;
@@ -65,16 +69,16 @@ public class OffOnPeakStats {
 		{
 			if(offPeakCount != 0) 
 			{
-				double diff = TimeUnit.MILLISECONDS.toMinutes(onAverage) - TimeUnit.MILLISECONDS.toMinutes(offAverage);
-				double percentage = diff/TimeUnit.MILLISECONDS.toMinutes(offAverage);;
+				int diff = (int) (onAverage - offAverage);
+				double percentage = (double) diff/onAverage;
 				diffBetweenOffOn = (percentage * 100);	
 			}
 		}
 		
-		if(averageOffPeakTime.equals(averageOnPeakTime)){
-			offOnDiff = "0.0";
-		}else if(diffBetweenOffOn == 0){
+		if(diffBetweenOffOn == 0)
 			offOnDiff = "N/A";
+		else if(averageOffPeakTime.equals(averageOnPeakTime)){
+			offOnDiff = "0.0";
 		}else{
 			offOnDiff = String.format("%.1f",diffBetweenOffOn); 
 		}

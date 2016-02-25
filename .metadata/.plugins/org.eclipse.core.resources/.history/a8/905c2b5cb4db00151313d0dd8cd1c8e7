@@ -43,6 +43,11 @@ public class OffOnPeakStats {
 		}
 		}catch(IndexOutOfBoundsException e){}
 		
+		//System.out.println(onPeakTotalTime);
+		for (int b = 2; b < routeStasticsData.get(count).size(); b = b + 3) {
+		
+		}
+		
 		
 		long offAverage = 0;
 		long onAverage = 0;
