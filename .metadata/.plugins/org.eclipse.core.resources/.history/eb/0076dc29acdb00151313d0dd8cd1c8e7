@@ -70,19 +70,18 @@ public class OffOnPeakStats {
 			if(offPeakCount != 0) 
 			{
 				int diff = (int) (onAverage - offAverage);
+				System.out.println(diff);
 				double percentage = (double) diff/onAverage;
-				diffBetweenOffOn = (percentage * 100);	
+				System.out.println(percentage);
+				diffBetweenOffOn = (percentage * 100);
 			}
 		}
 		
+		
 		if(diffBetweenOffOn == 0)
 			offOnDiff = "N/A";
-		else if(averageOffPeakTime.equals(averageOnPeakTime)){
-			offOnDiff = "0.0";
-		}else{
+		else
 			offOnDiff = String.format("%.1f",diffBetweenOffOn); 
-		}
-		
 	}
 	
 	public void resetVariables()
@@ -118,7 +117,6 @@ public class OffOnPeakStats {
 	
 	public String getOffOnDiff()
 	{
-		String result = String.valueOf(offOnDiff);
-		return result;
+		return offOnDiff;
 	}
 }
