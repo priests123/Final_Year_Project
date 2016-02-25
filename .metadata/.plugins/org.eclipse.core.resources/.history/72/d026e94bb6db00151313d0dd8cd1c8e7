@@ -15,7 +15,6 @@ public class OffOnPeakStats {
 	static String averageOnPeakTime = null;
 	static String offOnDiff = null;
 	
-	//Calculates the on/off peak statistics, count, averages and percentage differences, doesn't return anything, use get methods instead
 	
 	public OffOnPeakStats(ArrayList<ArrayList<Object>> routeStasticsData, int count)
 	{
@@ -82,9 +81,6 @@ public class OffOnPeakStats {
 		
 	}
 	
-	
-	//Resets variables ready for next instance of OffOnPeakStats
-	
 	public void resetVariables()
 	{
 		offPeakCount = 0;
@@ -93,9 +89,6 @@ public class OffOnPeakStats {
 		averageOnPeakTime = null;
 		offOnDiff = null;
 	}
-	
-	
-	//Get methods
 	
 	public String getOffPeakCount()
 	{

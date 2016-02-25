@@ -8,7 +8,7 @@ import java.util.TimeZone;
 
 public class CalculateStats {
 
-	//Calculates the min and max times for a route depending on what is passed in via operator
+	//Description
 	
 	public static String calMinMax(ArrayList<ArrayList<Object>> routeStasticsData, String operator, int count) 
 	{
@@ -41,7 +41,7 @@ public class CalculateStats {
 		return dateFormat.format(minMaxTime);
 	}
 	
-	//Calculates the average time of a route
+	//DEscription
 	
 	public static String calAverage(ArrayList<ArrayList<Object>> routeStasticsData, int count) 
 	{

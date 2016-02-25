@@ -36,7 +36,7 @@ public class RouteStastics {
 		return routeStasticsData;
 	}
 	
-	//Takes in the arraylist of routesStatistics and returns an arraylist of arraylists containing the final statistics to be printed.
+	//DESCRIPTION
 	
 	public static ArrayList<ArrayList<Object>> generateRouteStatistics(ArrayList<ArrayList<Object>> routeStasticsData)
 	{
