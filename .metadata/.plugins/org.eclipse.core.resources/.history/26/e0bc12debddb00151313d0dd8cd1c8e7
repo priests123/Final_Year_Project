@@ -1,0 +1,39 @@
+package RailData;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		String fileLcoation = "C:\\Users\\Michael\\Desktop\\Spark\\DataSets\\465245-weekly-routes.txt";
+		ArrayList<ArrayList<String>> railData = ReadInFile.readInCSV(fileLcoation);
+		ArrayList<ArrayList<Object>> allRoutes = RailDataToRoute.convertRailDataToRoutes(railData);
+		ArrayList<ArrayList<Object>> routeStasticsData = RouteStastics.generateRouteStasticsData(allRoutes);
+		ArrayList<ArrayList<Object>> routeStatistics = RouteStastics.generateRouteStatistics(routeStasticsData);
+		//PrintOut.printRouteStatistics(routeStastics);
+		//System.out.println(routeStasticsData);
+		
+		for(int a = 3; a < routeStasticsData.get(10).size(); a = a + 3){
+			ArrayList<ArrayList<Object>> routeStatisticsDays = new ArrayList<ArrayList<Object>>();
+			
+			Date currDayOfWeek = (Date) routeStasticsData.get(10).get(a);
+			
+			Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(currDayOfWeek);
+	        System.out.println(calendar.get(Calendar.DAY_OF_WEEK));
+			
+			
+			//System.out.println(currDayOfWeek);
+			
+			
+		
+			
+		}
+		
+		
+	}
+
+}
