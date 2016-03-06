@@ -1,0 +1,20 @@
+package RailData;
+
+import java.util.ArrayList;
+
+public class RouteStatisticsDays {
+
+	public static ArrayList<ArrayList<Object>> generateRouteStasticsDaysData(ArrayList<ArrayList<Object>> routeStasticsData){
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return routeStatisticsDays;
+		
+	}
+}

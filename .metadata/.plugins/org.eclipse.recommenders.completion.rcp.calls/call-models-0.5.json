@@ -5,8 +5,9 @@
     "error": "No class path info available for \u0027C:\\Users\\Michael\\Documents\\GitHub\\Final_Year_Project\\Final Year Project\\src\u0027. Skipped."
   },
   "C:\\Program Files (x86)\\Java\\jre1.8.0_73\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
     "location": "C:\\Program Files (x86)\\Java\\jre1.8.0_73\\lib\\rt.jar",
-    "status": "UNRESOLVED",
+    "status": "RESOLVED",
     "error": "No call model found for \u0027C:\\Program Files (x86)\\Java\\jre1.8.0_73\\lib\\rt.jar\u0027. Neither fingerprint \u0027c8a0ec838d288658a489318a19e9895552075766\u0027 nor symbolic name \u0027jre\u0027 are known."
   }
 }

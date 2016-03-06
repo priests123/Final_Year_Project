@@ -25,4 +25,23 @@ public class PrintOut {
 		}
 	}
 	
+	//Prints out the contents of routeStatisticsDays
+	
+	public static void printRouteDayStatistics(ArrayList<ArrayList<Object>> routeStasticsDays){
+		System.out.printf("%-45s%-20s%-20s%-20s%-20s%-20s\n", "Route", "Day of Week", "Count", "Average", "Minimum", "Maximum");
+		for(int m = 0; m < routeStasticsDays.size(); m ++){
+			for(int i = 0; i < routeStasticsDays.get(m).size()-1; i+=5){
+			if(i > 0)
+				System.out.print("                                             ");
+			else
+				System.out.printf("%-45s", routeStasticsDays.get(m).get(i));
+			System.out.printf("%-20s", routeStasticsDays.get(m).get(i+1));
+			System.out.printf("%-20s", routeStasticsDays.get(m).get(i+2));
+			System.out.printf("%-20s", routeStasticsDays.get(m).get(i+3));
+			System.out.printf("%-20s", routeStasticsDays.get(m).get(i+4));
+			System.out.printf("%-20s\n", routeStasticsDays.get(m).get(i+5));
+			}
+		}
+	}
+	
 }
