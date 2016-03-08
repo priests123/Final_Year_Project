@@ -44,4 +44,18 @@ public class PrintOut {
 		}
 	}
 	
+	public static void printRouteStasticsBetweenStations (ArrayList<ArrayList<Object>> routeStasticsBetweenStations){
+		System.out.printf("%-45s%-45s%-20s\n", "Route", "Stations", "Time between/at stations");
+		for(int a = 0; a < routeStasticsBetweenStations.size(); a++){
+			for(int i = 0; i < routeStasticsBetweenStations.get(a).size()-1; i+=2){
+				if(i > 0)
+					System.out.print("                                             ");
+				else
+					System.out.printf("%-45s", routeStasticsBetweenStations.get(a).get(i));
+				System.out.printf("%-45s", routeStasticsBetweenStations.get(a).get(i+1));
+				System.out.printf("%-20s\n", routeStasticsBetweenStations.get(a).get(i+2));
+			}
+			System.out.println();
+		}
+	}
 }

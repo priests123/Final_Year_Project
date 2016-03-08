@@ -1,0 +1,23 @@
+package RailData;
+
+import java.util.ArrayList;
+
+public class RouteStasticsBetweenStations {
+	public static ArrayList<ArrayList<Object>> generateRouteStasticsData(ArrayList<ArrayList<Object>> rawRailData){
+		ArrayList<ArrayList<Object>> allStops = new ArrayList<ArrayList<Object>>();
+		ArrayList<Object> rawRailDataLine = new ArrayList<Object>();
+		for(int a = 0; a < rawRailData.size(); a++){
+			rawRailDataLine.add(rawRailData.get(a).get(3)); //Station name
+			rawRailDataLine.add(rawRailData.get(a).get(1)); //Date
+			rawRailDataLine.add(rawRailData.get(a).get(2)); //Start/End
+			if(rawRailData.size() == 18)
+				rawRailDataLine.add(rawRailData.get(a).get(17)); //First/Last
+			allStops.add(rawRailDataLine);
+			}
+		
+		
+		
+		
+		return allStops;
+	}
+}

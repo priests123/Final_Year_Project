@@ -13,13 +13,16 @@ public class Main {
 	public static void main(String[] args) {
 
 		String fileLcoation = "C:\\Users\\Michael\\Desktop\\Spark\\DataSets\\465245-weekly-routes.txt";
-		ArrayList<ArrayList<String>> railData = ReadInFile.readInCSV(fileLcoation);
-		ArrayList<ArrayList<Object>> allRoutes = RailDataToRoute.convertRailDataToRoutes(railData);
+		ArrayList<ArrayList<String>> rawRailData = ReadInFile.readInCSV(fileLcoation);
+		ArrayList<ArrayList<Object>> allRoutes = RailDataToRoute.convertRailDataToRoutes(rawRailData);
 		ArrayList<ArrayList<Object>> routeStasticsData = RouteStastics.generateRouteStasticsData(allRoutes);
-		ArrayList<ArrayList<Object>> routeStatistics = RouteStastics.generateRouteStatistics(routeStasticsData);
-		PrintOut.printRouteStatistics(routeStatistics);
-		ArrayList<ArrayList<Object>> routeStasticsDays = RouteStatisticsDays.generateRouteStasticsDaysData(routeStasticsData);
-		PrintOut.printRouteDayStatistics(routeStasticsDays);
+		//ArrayList<ArrayList<Object>> routeStatistics = RouteStastics.generateRouteStatistics(routeStasticsData);
+		//PrintOut.printRouteStatistics(routeStatistics);
+		//ArrayList<ArrayList<Object>> routeStasticsDays = RouteStatisticsDays.generateRouteStasticsDaysData(routeStasticsData);
+		//PrintOut.printRouteDayStatistics(routeStasticsDays);
+		
+		ArrayList<ArrayList<Object>> allStops = RouteStasticsBetweenStations.generateRouteStasticsData(rawRailData);
+		PrintOut.printRouteStasticsBetweenStations(allStops);
 	}
 	
 }

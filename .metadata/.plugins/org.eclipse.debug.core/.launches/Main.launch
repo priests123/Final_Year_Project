@@ -8,4 +8,5 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="RailData.Main"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Final Year Project"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms512M -Xmx1024M"/>
 </launchConfiguration>
