@@ -1,0 +1,21 @@
+package importToDB;
+
+import java.util.ArrayList;
+
+public class FormatFile {
+
+		public static ArrayList<ArrayList<String>> FormatCSV(String fileLcoation){
+			ArrayList<ArrayList<String>> rawRailDataFile = ReadInFile.readInCSV(fileLcoation);
+			
+			for(int a = 0; a < rawRailDataFile.size(); a++){
+				for(int b = 0; b < rawRailDataFile.get(a).size(); b++){
+					rawRailDataFile.get(a).remove(4);
+					//rawRailDataFile.get(a).remove(5);
+				}
+				System.out.println(rawRailDataFile.get(a));
+			}
+			
+			//System.out.println(rawRailDataFile);
+			return rawRailDataFile;
+		}
+}

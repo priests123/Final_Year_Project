@@ -1,0 +1,19 @@
+package importToDB;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Stations {
+
+	public static void addStations(ArrayList<ArrayList<String>> rawRailDataFile){
+		System.out.print(rawRailDataFile);
+		HashSet<Integer> uniqueStationsInFile = new HashSet<Integer>();
+		for(int a = 0; a < rawRailDataFile.size(); a++){
+			String currentStation = rawRailDataFile.get(a).get(3);
+			System.out.println("--"+currentStation);
+			System.out.println("--"+currentStation.replaceAll("\\s",""));
+		}
+		
+	}
+	
+}

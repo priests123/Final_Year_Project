@@ -1,0 +1,23 @@
+package importToDB;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Stations {
+
+	public static void addStations(ArrayList<ArrayList<String>> rawRailDataFile){
+		//System.out.print(rawRailDataFile);
+		HashSet<String> uniqueStationsInFile = new HashSet<String>();
+		for(int a = 0; a < rawRailDataFile.size(); a++){
+			String currentStation = rawRailDataFile.get(a).get(3);
+			if(uniqueStationsInFile.add(currentStation));	
+		}
+		//System.out.println(uniqueStationsInFile.size());
+		ArrayList<String> allStation = SQLDatabase.selectAllFromStation();
+		System.out.println(allStation);
+		for(int b = 0; b < allStation.size(); b++){
+			
+		}
+	}
+	
+}

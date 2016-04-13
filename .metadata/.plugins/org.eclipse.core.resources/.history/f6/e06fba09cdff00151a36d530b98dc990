@@ -1,0 +1,51 @@
+package importToDB;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class SQLDatabase {
+
+	private static Connection DBConn;
+	
+	public static void OpenConnection() {
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		} catch (ClassNotFoundException e1) {
+			System.out.println("No associated SQL driver");
+			e1.printStackTrace();
+		}
+		
+		String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=RailTransportation";			
+		String user = "Rail";
+		String pass = "Rail";
+		
+		try {
+			DBConn = DriverManager.getConnection(URL,user,pass);
+		} catch (SQLException e) {
+			System.out.println("No connection to RailTransportation database");
+			e.printStackTrace();
+		}
+		if(!DBConn.equals(null)){
+			System.out.println("Connected to the Rail Transportation Database");
+		}
+	}
+	
+	public static ArrayList<String> selectAllFromStation(){
+		ArrayList<String> allStation = new ArrayList<String>();
+		try{
+			ResultSet result = DBConn.createStatement().executeQuery("SELECT Station_Name FROM Station");
+			while(result.next()){
+				allStation.add(result.getString(1));
+			}
+		} catch (SQLException e) {
+			System.out.println("SELECT Station_Name FROM Station, query failed");
+			e.printStackTrace();
+		}
+		return allStation;
+	}
+	
+}

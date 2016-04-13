@@ -1,0 +1,74 @@
+package importToDB;
+
+import java.util.ArrayList;
+
+public class Routes {
+
+	public static ArrayList<String> addRoutes(ArrayList<ArrayList<String>> rawRailDataFile){
+		//System.out.println(rawRailDataFile);	
+		ArrayList<ArrayList<String>> uniqueRoutes = new ArrayList<ArrayList<String>>();
+		for(int a = 0; a < rawRailDataFile.size(); a++){
+			ArrayList<String> currRoute = new ArrayList<String>();
+			if((rawRailDataFile.get(a).size() == 5) && (rawRailDataFile.get(a).get(4).equals("FIRST"))){
+				for(int b = a; b < rawRailDataFile.size(); b+=2){
+					if((rawRailDataFile.get(b+1).size() == 5) && (rawRailDataFile.get(b+1).get(4).equals("LAST"))){
+						currRoute.add(rawRailDataFile.get(b).get(3));
+						currRoute.add(rawRailDataFile.get(b+1).get(3));
+						//System.out.println(currRoute);
+						break;
+					}
+					currRoute.add(rawRailDataFile.get(b).get(3));
+					//System.out.println(currRoute);
+				}
+			}
+			if((!(uniqueRoutes.contains(currRoute))) && currRoute.size() > 0){
+				uniqueRoutes.add(currRoute);
+			}
+		}
+		//System.out.println(uniqueRoutes);
+		
+		
+		for(int c = 0; c < uniqueRoutes.size(); c++){
+			ArrayList<ArrayList<String>> currRoute = new ArrayList<ArrayList<String>>();
+			String routeStart = uniqueRoutes.get(c).get(0);
+			String routeEnd = uniqueRoutes.get(c).get(uniqueRoutes.get(c).size()-1);
+			
+			for(int d = 0; d < uniqueRoutes.size(); d++){
+				if((routeStart.equals(uniqueRoutes.get(d).get(0).toString())) && (routeEnd.equals(uniqueRoutes.get(d).get(uniqueRoutes.get(d).size()-1).toString()))){
+					currRoute.add(uniqueRoutes.get(d));
+				}
+			}
+			
+			ArrayList<String> stndRoute = currRoute.get(0);
+			//System.out.println();
+			//System.out.println(stndRoute);
+			ArrayList<String> finalRoutes = new ArrayList<String>();
+			
+			finalRoutes.add(currRoute.get(0).get(0) + " to " + currRoute.get(0).get(currRoute.get(0).size()-1));
+			//System.out.println(finalRoutes);
+			
+			System.out.println(currRoute);
+			
+			for(int e = 1; e < currRoute.size(); e++){
+				for(int f = 1; f < currRoute.get(e).size(); f++){
+					if(!(currRoute.get(0).get(f).toString().equals(currRoute.get(e).get(f).toString()))){
+						finalRoutes.add(currRoute.get(e).get(0) + " to " + currRoute.get(e).get(currRoute.get(e).size()-1) + " via " + currRoute.get(e).get(f));
+					}
+				}
+				
+				
+			}
+			
+			System.out.println(currRoute);
+			
+			
+			//System.out.print(uniqueRoutes.get(c).get(0) + "   ");
+			//System.out.println(uniqueRoutes.get(c).get(uniqueRoutes.get(c).size()-1));
+		}
+		
+		
+		
+		
+		return null;
+	}
+}

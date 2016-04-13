@@ -39,6 +39,19 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "sqljdbc41",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "51c88bb56aebc21d96f91bd6a777707ab8e663ea",
+    "jarFileModificationDate": "2015-11-03T17:12:40Z",
+    "location": "C:\\Program Files\\Microsoft JDBC Driver 6.0 for SQL Server\\sqljdbc_6.0\\enu\\sqljdbc41.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -143,6 +156,19 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "sqljdbc42",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "b566dab80c1e5afe8f4ad6e446e6e64ba024c1ac",
+    "jarFileModificationDate": "2015-11-03T17:12:40Z",
+    "location": "C:\\Program Files\\Microsoft JDBC Driver 6.0 for SQL Server\\sqljdbc_6.0\\enu\\sqljdbc42.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -182,6 +208,19 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "sqljdbc",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "e7699d38947377a23d83fabab9ffc21f9acba4e0",
+    "jarFileModificationDate": "2015-11-03T17:12:40Z",
+    "location": "C:\\Program Files\\Microsoft JDBC Driver 6.0 for SQL Server\\sqljdbc_6.0\\enu\\sqljdbc.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -193,6 +232,19 @@
     "jarFileModificationDate": "2016-02-17T11:30:50.870Z",
     "location": "C:\\Program Files (x86)\\Java\\jre1.8.0_73\\lib\\ext\\access-bridge-32.jar",
     "javaRuntime": true
+  },
+  {
+    "symbolicName": "sqljdbc4",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "da6229555f7228870e249b188775d676d98932d3",
+    "jarFileModificationDate": "2015-11-03T17:12:40Z",
+    "location": "C:\\Program Files\\Microsoft JDBC Driver 6.0 for SQL Server\\sqljdbc_6.0\\enu\\sqljdbc4.jar",
+    "javaRuntime": false
   },
   {
     "symbolicName": "jre",
