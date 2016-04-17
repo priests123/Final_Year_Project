@@ -1,6 +1,7 @@
 package importToDB;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,5 +49,27 @@ public class ReadInFile {
 		}
 		return lineData;
 	}
+	
+	public static ArrayList<ArrayList<String>> readFirstLine(String fileLocation){
+
+		ArrayList<ArrayList<String>> rawData = new ArrayList<ArrayList<String>>();
+		String rawFileLine = null;
+		try {
+			BufferedReader firstLine = new BufferedReader(new FileReader(fileLocation));
+	
+				rawFileLine = firstLine.readLine();
+				rawData.add(converttoArrayList(rawFileLine));
+			
+			//System.out.println(firstLine);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//System.out.println(rawData);
+		
+		return rawData;
+		
+	}
+	
 	
 }

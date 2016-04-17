@@ -105,4 +105,80 @@ public class SQLDatabase {
 		System.out.println("Unit numbers added = " + countAdded);
 	}
 	
+	public static ArrayList<String> selectAllFromRoute(String sql, int noOfColumns){
+		ArrayList<String> allRouteDetails = new ArrayList<String>();
+		try{
+			ResultSet result = DBConn.createStatement().executeQuery(sql);
+			while(result.next()){
+				allRouteDetails.add(result.getString(1));
+				allRouteDetails.add(result.getString(2));
+				if(noOfColumns == 3)
+					allRouteDetails.add(result.getString(3));
+			}
+		} catch (SQLException e) {
+			System.out.println(sql + ", query failed");
+			e.printStackTrace();
+		}
+		return allRouteDetails;
+	}
+	
+	public static void addNewRoutes(ArrayList<String> uniqueRoutesInFile, String sql){
+		ArrayList<String> uniqueRoutes = new ArrayList<String>(uniqueRoutesInFile);
+		int countAdded = 0;
+		for(int a = 0; a < uniqueRoutes.size(); a+=2){
+			try{
+				PreparedStatement statement = DBConn.prepareStatement(sql);
+				statement.setString(1, uniqueRoutes.get(a));
+				statement.setString(2, uniqueRoutes.get(a+1));
+				int rowInserted = statement.executeUpdate();
+				if(rowInserted > 0)
+					countAdded++;
+			} catch (SQLException e) {
+				System.out.println("Failed to insert station value " + uniqueRoutes.get(a));
+				e.printStackTrace();
+			}	
+		}
+		System.out.println("Routes that should be added = " + uniqueRoutes.size()/2);
+		System.out.println("Routes added = " + countAdded);
+	}
+	
+	public static void addNewJourneys(ArrayList<ArrayList<String>> formattedData, String sql){
+		int countAdded = 0;
+		for(int a = 0; a<formattedData.size(); a++){
+			try{
+				PreparedStatement statement = DBConn.prepareStatement(sql);
+				statement.setString(1, formattedData.get(a).get(0));
+				statement.setString(2, formattedData.get(a).get(1));
+				statement.setString(3, formattedData.get(a).get(2));
+				statement.setString(4, formattedData.get(a).get(3));
+				statement.setString(5, formattedData.get(a).get(4));
+				statement.setString(6, formattedData.get(a).get(5));
+				statement.setString(7, formattedData.get(a).get(6));
+				int rowInserted = statement.executeUpdate();
+				if(rowInserted > 0)
+					countAdded++;
+			} catch (SQLException e) {
+				System.out.println("Failed to insert journey value " + formattedData.get(a));
+				e.printStackTrace();
+			}	
+			
+		}
+		
+		System.out.println("Journeys that should be added = " + formattedData.size());
+		System.out.println("Journeys added = " + countAdded);
+	}
+	
+	public static Boolean isDuplicate(String sql){
+		try{
+			ResultSet result = DBConn.createStatement().executeQuery(sql);
+			while(result.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println(sql + ", query failed");
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 }

@@ -1,0 +1,123 @@
+package importToDB;
+
+import java.util.ArrayList;
+
+
+public class FormatFile {
+
+		public static ArrayList<ArrayList<String>> FormatCSV(String fileLcoation){
+			ArrayList<ArrayList<String>> rawRailDataFile = ReadInFile.readInCSV(fileLcoation);
+			
+			for(int a = 0; a < rawRailDataFile.size(); a++){
+				for(int b = 0; b < 13; b++){
+					rawRailDataFile.get(a).remove(4);
+				}
+			}
+			
+			
+			ArrayList<String> allStations = Stations.addStations(rawRailDataFile);			
+			UnitNumber.addUnitNumber(rawRailDataFile);
+			ArrayList<String> allRoutes = Routes.addRoutes(rawRailDataFile);
+			//for(int m = 0; m < rawRailDataFile.size(); m++){
+			//	System.out.println(rawRailDataFile.get(m));
+				//System.out.println(allRoutes.get(m));
+			//}
+			int qwerty = 0;
+			ArrayList<ArrayList<String>> formattedData = new ArrayList<ArrayList<String>>();
+			for(int a = 0; a < rawRailDataFile.size(); a++){
+				String journeyStartedTime = null;
+				String unitNo = null;
+				String routeID = null;
+				boolean bool = false;
+				int loopCount = 0;
+				ArrayList<String> currRoute = new ArrayList<String>();
+				if((rawRailDataFile.get(a).size() == 5) && (rawRailDataFile.get(a).get(4).equals("FIRST"))){
+					unitNo = rawRailDataFile.get(a).get(0);
+					journeyStartedTime = rawRailDataFile.get(a).get(1);
+					for(int b = a; b < rawRailDataFile.size(); b+=2){
+						if((rawRailDataFile.get(b+1).size() == 5) && (rawRailDataFile.get(b+1).get(4).equals("LAST"))){
+							currRoute.add(rawRailDataFile.get(b).get(3));
+							currRoute.add(rawRailDataFile.get(b+1).get(3));			
+							//System.out.println("LAST");
+							loopCount = b;
+							bool = true;
+							break;
+						}
+						currRoute.add(rawRailDataFile.get(b).get(3));		
+					}
+					String listedRoute = currRoute.toString().replaceAll("\\[", "").replaceAll("\\]","");
+					int pos = allRoutes.indexOf(listedRoute)-2;
+					routeID = allRoutes.get(pos);
+				}
+				
+				//System.out.println(pos);
+				
+				if(bool ==true){
+				for(int b = 0; b < loopCount ; b+=2){
+					
+						ArrayList<String> rowData = new ArrayList<String>();
+						rowData.add(unitNo);
+						rowData.add(journeyStartedTime);
+						rowData.add(routeID);
+						
+						String stationLeftVal = rawRailDataFile.get(qwerty).get(3);
+						int stationLeftPos = allStations.indexOf(stationLeftVal)-1;
+						rowData.add(allStations.get(stationLeftPos));
+						
+						rowData.add(rawRailDataFile.get(qwerty).get(1));
+						
+						String stationArriveVal = rawRailDataFile.get(qwerty+1).get(3);
+						int stationArrivePos = allStations.indexOf(stationArriveVal)-1;
+						rowData.add(allStations.get(stationArrivePos));
+						
+						rowData.add(rawRailDataFile.get(qwerty+1).get(1));
+						
+						formattedData.add(rowData);
+						//System.out.println(formattedData);
+						qwerty = b;
+						
+				
+				}
+				//System.out.println(formattedData);
+			}}
+			System.out.println(formattedData);
+			
+			
+			
+			
+			
+			/**
+			
+			
+			for(int c = 0; c < rawRailDataFile.size(); c++){
+				String journeyStartedTime = null;
+				String unitNo = null;
+				ArrayList<String> currentRow = null;
+				if((rawRailDataFile.get(c).size() == 5) && (rawRailDataFile.get(c).get(4).equals("FIRST"))){
+					journeyStartedTime = rawRailDataFile.get(c).get(1);
+					unitNo = rawRailDataFile.get(c).get(0);
+					//System.out.println(journeyStartedTime);
+				}
+				
+				//currentRow.add(unitNo);
+				//currentRow.add(journeyStartedTime);
+				//ADD ROUTE ID
+				
+				
+				
+				
+				
+				
+				
+				if((rawRailDataFile.get(c).size() == 5) && (rawRailDataFile.get(c).get(4).equals("LAST"))){
+					
+				}else{
+					
+				}
+			}
+			
+			
+			**/
+			return rawRailDataFile;
+		}
+}

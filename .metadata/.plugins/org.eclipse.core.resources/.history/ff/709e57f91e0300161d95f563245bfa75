@@ -1,0 +1,30 @@
+package Display;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+
+import Display.StatisticsGUI.Names;
+
+public class ImportGUI {
+
+	class Names {
+		public static final String IMPORT = "Import";
+		public static final String CANCEL = "Cancel";
+		public static final String BROWSE = "Browse";
+	}
+	
+	public ImportGUI(JFrame window) {
+		
+	}
+	
+	class Actions implements ActionListener{
+		public void actionPerformed(ActionEvent ae) {
+	
+			
+		}
+	}
+
+	
+}

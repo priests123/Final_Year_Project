@@ -1,0 +1,51 @@
+package Display;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.RootPaneContainer;
+
+import Display.StatisticsGUI.Names;
+
+public class ImportGUI {
+
+	class Names {
+		public static final String IMPORT = "Import";
+		public static final String CANCEL = "Cancel";
+		public static final String BROWSE = "Browse";
+	}
+	
+	public ImportGUI(RootPaneContainer rpc) {
+		
+		Container cp = rpc.getContentPane();
+		Container rootWindow = (Container) rpc;
+		cp.setLayout(null);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		int height = screenSize.height;
+		int width = screenSize.width;
+		
+		int H = height - (height / 5);
+		int W = width - (width / 5);
+		
+		rootWindow.setSize(W, H);
+		rootWindow.setLocation((width / 2 - W/2), (height / 2 - H/2));
+		
+		rootWindow.setVisible( true );    
+		
+	}
+	
+	class Actions implements ActionListener{
+		public void actionPerformed(ActionEvent ae) {
+	
+			
+		}
+	}
+
+	
+}

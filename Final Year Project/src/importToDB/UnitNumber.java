@@ -14,7 +14,10 @@ public class UnitNumber {
 				uniqueUnitNumbersInFile.remove(allUnitNumbers.get(b));
 			}
 		}
-		if(uniqueUnitNumbersInFile.size() > 0)
+		if(uniqueUnitNumbersInFile.size() > 0){
 			SQLDatabase.addNewUnitNumbers(uniqueUnitNumbersInFile, "INSERT INTO Unit (Unit_No) VALUES (?)");
+		} else {
+			System.out.println("There were no new units to be added");
+		}
 	}
 }

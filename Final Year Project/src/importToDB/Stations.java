@@ -17,8 +17,11 @@ public class Stations {
 				uniqueStationsInFile.remove(allStations.get(b));
 			}
 		}
-		if(uniqueStationsInFile.size() > 0)
+		if(uniqueStationsInFile.size() > 0){
 			SQLDatabase.addNewStations(uniqueStationsInFile, "INSERT INTO Station (Station_Name) VALUES (?)");
+		} else {
+			System.out.println("There were no new stations to be added");
+		}
 		
 		return SQLDatabase.selectAllFromStation("SELECT Station_ID, Station_Name FROM Station", 2);
 	}

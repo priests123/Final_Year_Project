@@ -1,0 +1,32 @@
+package importToDB;
+
+import java.util.ArrayList;
+
+import javax.swing.*;
+
+import Display.StatisticsGUI;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		//SQLDatabase.OpenConnection();
+		
+		//String fileLcoation = "C:\\Users\\Michael\\Desktop\\Datasets\\465235.txt";
+		//ArrayList<ArrayList<String>> dataForImport = FormatFile.FormatCSV(fileLcoation);
+		Main.display();
+		
+	}
+	
+	public static void display() {
+		JFrame window = new JFrame();
+		window.setTitle("Name");
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		new StatisticsGUI(window);
+	}
+	
+	
+	
+
+}

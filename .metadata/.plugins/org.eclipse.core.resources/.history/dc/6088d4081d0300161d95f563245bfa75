@@ -1,0 +1,45 @@
+package Display;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+public class StatisticsGUI {
+
+	class BtnNames {
+		public static final String IMPORT = "Import";
+	}
+	
+	//private JLabel label = new JLabel();
+	private JButton theBtImport = new JButton(BtnNames.IMPORT);
+	
+	private ActionListeners theCB = new ActionListeners();
+	
+	public StatisticsGUI(RootPaneContainer rpc) {
+		
+		
+		Container cp = rpc.getContentPane();
+		Container rootWindow = (Container) rpc;
+		cp.setLayout(null);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		int height = screenSize.height;
+		int width = screenSize.width;
+		
+		int H = height - (height / 5);
+		int W = width - (width / 5);
+		
+		rootWindow.setSize(W, H);
+		rootWindow.setLocation((width / 2 - W/2), (height / 2 - H/2));
+		
+		theBtImport.setBounds(W - 170, 30, 120, 40);
+		theBtImport.addActionListener(theCB);
+		cp.add(theBtImport);
+		
+		rootWindow.setVisible(true);
+		
+	}
+
+
+}
