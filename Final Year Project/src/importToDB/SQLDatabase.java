@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import Display.inputResponses;
+
 public class SQLDatabase {
 
 	private static Connection DBConn;
@@ -68,8 +70,12 @@ public class SQLDatabase {
 				e.printStackTrace();
 			}	
 		}
-		System.out.println("Stations that should be added = " + uniqueStations.size());
-		System.out.println("Stations added = " + countAdded);
+		inputResponses.clearInputResponses();
+		inputResponses.addInoutResponses("New stations in file = " + uniqueStations.size());
+		inputResponses.addInoutResponses("New stations added = " + countAdded);
+
+		//System.out.println("Stations that should be added = " + uniqueStations.size());
+		//System.out.println("Stations added = " + countAdded);
 	}
 	
 	public static ArrayList<String> selectAllFromUnit(String sql){
@@ -101,8 +107,13 @@ public class SQLDatabase {
 				e.printStackTrace();
 			}	
 		}
-		System.out.println("Unit numbers that should be added = " + uniqueUnitNumbers.size());
-		System.out.println("Unit numbers added = " + countAdded);
+		
+		inputResponses.addInoutResponses("New units in file = " + uniqueUnitNumbers.size());
+		inputResponses.addInoutResponses("New units added = " + countAdded);
+		
+		
+		//System.out.println("Unit numbers that should be added = " + uniqueUnitNumbers.size());
+		//System.out.println("Unit numbers added = " + countAdded);
 	}
 	
 	public static ArrayList<String> selectAllFromRoute(String sql, int noOfColumns){
@@ -111,6 +122,7 @@ public class SQLDatabase {
 			ResultSet result = DBConn.createStatement().executeQuery(sql);
 			while(result.next()){
 				allRouteDetails.add(result.getString(1));
+				//if(noOfColumns == 2)
 				allRouteDetails.add(result.getString(2));
 				if(noOfColumns == 3)
 					allRouteDetails.add(result.getString(3));
@@ -138,8 +150,12 @@ public class SQLDatabase {
 				e.printStackTrace();
 			}	
 		}
-		System.out.println("Routes that should be added = " + uniqueRoutes.size()/2);
-		System.out.println("Routes added = " + countAdded);
+		
+		inputResponses.addInoutResponses("New routes in file = " + uniqueRoutes.size()/2);
+		inputResponses.addInoutResponses("New routes added = " + countAdded);
+		
+		//System.out.println("Routes that should be added = " + uniqueRoutes.size()/2);
+		//System.out.println("Routes added = " + countAdded);
 	}
 	
 	public static void addNewJourneys(ArrayList<ArrayList<String>> formattedData, String sql){
@@ -164,8 +180,11 @@ public class SQLDatabase {
 			
 		}
 		
-		System.out.println("Journeys that should be added = " + formattedData.size());
-		System.out.println("Journeys added = " + countAdded);
+		inputResponses.addInoutResponses("Records that should be added = " + formattedData.size());
+		inputResponses.addInoutResponses("Records added = " + countAdded);
+		
+		//System.out.println("Journeys that should be added = " + formattedData.size());
+		//System.out.println("Journeys added = " + countAdded);
 	}
 	
 	public static Boolean isDuplicate(String sql){
@@ -179,6 +198,58 @@ public class SQLDatabase {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public static ArrayList<String> selectAllFromRoute2(String sql) {
+		ArrayList<String> allRouteDetails = new ArrayList<String>();
+		try{
+			ResultSet result = DBConn.createStatement().executeQuery(sql);
+			while(result.next()){
+				allRouteDetails.add(result.getString(1));
+			}
+		} catch (SQLException e) {
+			System.out.println(sql + ", query failed");
+			e.printStackTrace();
+		}
+		return allRouteDetails;
+	}
+	
+	public static ArrayList<ArrayList<String>> usrSearch(String sql, String type, String routeSelected, String dateTimeFrom, String dateTimeTo){
+		ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
+		try{
+			PreparedStatement statement = DBConn.prepareStatement(sql);
+			if(type.equals("justRoute")){		
+				statement.setString(1, routeSelected);
+			}else if(type.equals("bothDateTime")){
+				statement.setString(1, routeSelected);
+				statement.setString(2, dateTimeFrom);
+				statement.setString(3, dateTimeTo);
+			}else if(type.equals("justFromDateTime")){
+				statement.setString(1, routeSelected);
+				statement.setString(2, dateTimeFrom);
+			}else if(type.equals("justToDateTime")){
+				statement.setString(1, routeSelected);
+				statement.setString(2, dateTimeTo);
+			}else{
+				return results;
+			}
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()){
+				ArrayList<String> row = new ArrayList<String>();
+				row.add(resultSet.getString(1));
+				row.add(resultSet.getString(2));
+				row.add(resultSet.getString(3));
+				row.add(resultSet.getString(4));
+				row.add(resultSet.getString(5));
+				row.add(resultSet.getString(6));
+				row.add(resultSet.getString(7));
+				results.add(row);
+			}
+		} catch (SQLException e) {
+			System.out.println(sql + ", query failed");
+			e.printStackTrace();
+		}
+		return results;
 	}
 	
 }

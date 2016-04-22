@@ -1,0 +1,103 @@
+package Display;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+import java.util.ArrayList;
+
+import javax.swing.*;
+
+public class StatisticsGUI {
+
+	class Names {
+		public static final String IMPORT = "Import";
+	}
+	
+	//private JLabel label = new JLabel();
+	private JButton theBtImport = new JButton(Names.IMPORT);	
+	private Actions theCB = new Actions();
+	static Container rootWindow;
+	private JComboBox routeSelect = new JComboBox();
+	
+	ArrayList<String> values = new ArrayList<String>();
+	
+	public static String routeSelected = "";
+	
+	public StatisticsGUI(RootPaneContainer rpc) { 
+		
+		
+		Container cp = rpc.getContentPane();
+		rootWindow = (Container) rpc;
+		cp.setLayout(null);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		int height = screenSize.height;
+		int width = screenSize.width;
+		
+		int H = height - (height / 5);
+		int W = width - (width / 5);
+		
+		rootWindow.setSize(W, H);
+		rootWindow.setLocation((width / 2 - W/2), (height / 2 - H/2));
+		
+		theBtImport.setBounds(W - 170, 30, 120, 40);
+		theBtImport.addActionListener(theCB);
+		theBtImport.setFont(Global.font2);
+		cp.add(theBtImport);
+		
+		routeSelect.setBounds(30, 30, 500, 30);
+		routeSelect.addActionListener(theCB);
+		routeSelect.addItem("");
+		routeSelect.setFont(Global.font2);
+		values = RouteSelectValues.populateAllRoutes();
+		
+		for(int a = 0; a < values.size(); a++){
+			routeSelect.addItem(values.get(a));
+		}
+		
+		
+		
+		cp.add(routeSelect);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		rootWindow.setVisible(true);
+		
+	}
+
+class Actions implements ActionListener{
+	public void actionPerformed(ActionEvent ae) {
+		//System.out.println("HEY");
+		String actionIs = ae.getActionCommand();
+			
+		if(actionIs.equals(Names.IMPORT)){
+			rootWindow.setVisible(false);
+			Main.displayImportGUI();
+		}
+	
+		Object c = ae.getSource();
+		
+		if(c == routeSelect){
+			routeSelected = routeSelect.getSelectedItem().toString();
+			System.out.println(routeSelected);
+		}
+		
+	}
+}
+	
+public static void setStatisticsGUIVisible(){
+	rootWindow.setVisible(true);
+}
+	
+	
+}

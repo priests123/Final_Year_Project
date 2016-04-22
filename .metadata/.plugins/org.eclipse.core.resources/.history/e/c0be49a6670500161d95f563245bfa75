@@ -1,0 +1,53 @@
+package Display;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.List;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.RootPaneContainer;
+
+
+
+public class ImportSummaryGUI {
+
+	Container rootWindow;
+	
+	private JLabel resultsLabel = new JLabel();
+	
+	class Names {
+		public static final String OK = "OK";
+	}
+	
+	public ImportSummaryGUI(RootPaneContainer rpc) {
+
+		Container cp = rpc.getContentPane();
+		rootWindow = (Container) rpc;
+		cp.setLayout(null);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		int height = screenSize.height;
+		int width = screenSize.width;
+		
+		int H = height/3;
+		int W = (width/2) - (width/8);
+		
+		resultsLabel.setBounds(10, 10, 200, 20);
+		resultsLabel.setText("TEST");
+		cp.add(resultsLabel);
+		
+		
+		rootWindow.setVisible(true);
+		
+	}
+	
+	
+	
+
+	
+	
+
+}

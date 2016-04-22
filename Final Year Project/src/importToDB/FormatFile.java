@@ -12,7 +12,7 @@ import java.util.TimeZone;
 
 public class FormatFile {
 
-		public static ArrayList<ArrayList<String>> FormatCSV(String fileLcoation){
+		public static String[] FormatCSV(String fileLcoation){
 			ArrayList<ArrayList<String>> rawRailDataFile = ReadInFile.readInCSV(fileLcoation);
 			
 			for(int a = 0; a < rawRailDataFile.size(); a++){
@@ -79,18 +79,22 @@ public class FormatFile {
 				}
 				
 				if(bool ==true){
+					SimpleDateFormat formatterOrigional = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+					SimpleDateFormat formatterNew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					for(int b = 0; b < currRouteAllData.size()-2 ; b+=2){
 						try{
 						ArrayList<String> rowData = new ArrayList<String>();
-						rowData.add(currRouteAllData.get(0).get(0));
-						rowData.add(currRouteAllData.get(0).get(1));
+						rowData.add(currRouteAllData.get(0).get(0));	
+						Date dateJourneyStarted = formatterOrigional.parse(currRouteAllData.get(0).get(1));
+						rowData.add(formatterNew.format(dateJourneyStarted));
 						rowData.add(routeID);
 						
 						String stationLeftVal = currRouteAllData.get(b).get(3);
 						int stationLeftPos = allStations.indexOf(stationLeftVal)-1;
 						rowData.add(allStations.get(stationLeftPos));
 						
-						rowData.add(currRouteAllData.get(b).get(1));
+						Date dateStationLeft = formatterOrigional.parse(currRouteAllData.get(b).get(1));
+						rowData.add(formatterNew.format(dateStationLeft));
 						
 						String stationArriveVal = currRouteAllData.get(b+1).get(3);
 						int stationArrivePos = allStations.indexOf(stationArriveVal)-1;
@@ -100,8 +104,8 @@ public class FormatFile {
 						//System.out.println(currRouteAllData.get(b+1).get(1));
 						//System.out.println(one);
 						
-						rowData.add(currRouteAllData.get(b+1).get(1));
-						
+						Date dateStationArrived = formatterOrigional.parse(currRouteAllData.get(b+1).get(1));
+						rowData.add(formatterNew.format(dateStationArrived));
 						
 						formattedData.add(rowData);
 						}catch (Exception e1) {System.out.println("Failed to parse dattime");}
@@ -122,8 +126,8 @@ public class FormatFile {
 			//for(int a = 0; a < formattedData.size(); a++)
 			//	System.out.println(formattedData.get(a));
 			
-			
+			String[] results = new String[4];
 		
-			return rawRailDataFile;
+			return results;
 		}
 }

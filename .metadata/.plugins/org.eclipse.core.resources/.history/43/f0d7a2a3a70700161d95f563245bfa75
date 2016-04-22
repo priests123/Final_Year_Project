@@ -1,0 +1,13 @@
+package Display;
+
+public class checkSearch {
+	
+	public static Boolean checkSearch(){
+		Boolean valid = true;
+		
+		
+		return valid;
+		
+	}
+
+}

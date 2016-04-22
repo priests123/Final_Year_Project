@@ -1,0 +1,20 @@
+package Display;
+
+import importToDB.SQLDatabase;
+
+import java.util.ArrayList;
+
+public class RouteSelectValues {
+
+	private static ArrayList<String> allRoutes = new ArrayList<String>();
+	
+	public static ArrayList<String> populateAllRoutes(){
+		return allRoutes = SQLDatabase.selectAllFromRoute("SELECT Route_Name from Route ORDER BY Route_Name", 1);
+	}
+	
+	public static void updateAllRoutes(){
+		allRoutes.clear();
+		allRoutes = SQLDatabase.selectAllFromRoute("SELECT Route_Name from Route ORDER BY Route_Name", 1);
+	}
+	
+}

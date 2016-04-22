@@ -1,0 +1,129 @@
+package importToDB;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
+
+
+public class FormatFile {
+
+		public static String[] FormatCSV(String fileLcoation){
+			ArrayList<ArrayList<String>> rawRailDataFile = ReadInFile.readInCSV(fileLcoation);
+			
+			for(int a = 0; a < rawRailDataFile.size(); a++){
+				for(int b = 0; b < 13; b++){
+					rawRailDataFile.get(a).remove(4);
+				}
+			}
+			
+			
+			ArrayList<String> allStations = Stations.addStations(rawRailDataFile);			
+			UnitNumber.addUnitNumber(rawRailDataFile);
+			ArrayList<String> allRoutes = Routes.addRoutes(rawRailDataFile);
+			//for(int m = 0; m < rawRailDataFile.size(); m++){
+			//	System.out.println(rawRailDataFile.get(m));
+				//System.out.println(allRoutes.get(m));
+			//}
+			//int qwerty = 0;
+			ArrayList<ArrayList<String>> formattedData = new ArrayList<ArrayList<String>>();			
+			//SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+			
+			for(int a = 0; a < rawRailDataFile.size(); a++){
+				//String journeyStartedTime = null;
+				//String unitNo = null;
+				String routeID = null;
+				boolean bool = false;
+				//int loopCount = 0;
+				ArrayList<String> currRoute = new ArrayList<String>();
+				ArrayList<ArrayList<String>> currRouteAllData = new ArrayList<ArrayList<String>>();
+				
+				if((rawRailDataFile.get(a).size() == 5) && (rawRailDataFile.get(a).get(4).equals("FIRST"))){
+					//unitNo = rawRailDataFile.get(a).get(0);
+					//journeyStartedTime = rawRailDataFile.get(a).get(1);
+					for(int b = a; b < rawRailDataFile.size(); b+=2){
+						ArrayList<String> currRouteData = new ArrayList<String>();
+						if((rawRailDataFile.get(b+1).size() == 5) && (rawRailDataFile.get(b+1).get(4).equals("LAST"))){
+							currRoute.add(rawRailDataFile.get(b).get(3));
+							currRoute.add(rawRailDataFile.get(b+1).get(3));	
+							currRouteData.addAll(rawRailDataFile.get(b));
+							currRouteAllData.add(currRouteData);
+							currRouteData = new ArrayList<String>();
+							currRouteData.addAll(rawRailDataFile.get(b+1));
+							currRouteAllData.add(currRouteData);
+							currRouteData.addAll(rawRailDataFile.get(b));
+							currRouteAllData.add(currRouteData);
+							currRouteData = new ArrayList<String>();
+							currRouteData.addAll(rawRailDataFile.get(b+1));
+							currRouteAllData.add(currRouteData);
+							//System.out.println("LAST");
+						//	loopCount = b;
+							bool = true;
+							break;
+						}
+						currRoute.add(rawRailDataFile.get(b).get(3));
+						
+						currRouteData.addAll(rawRailDataFile.get(b));
+						currRouteAllData.add(currRouteData);
+						currRouteData = new ArrayList<String>();
+						currRouteData.addAll(rawRailDataFile.get(b+1));
+						currRouteAllData.add(currRouteData);
+					}
+					String listedRoute = currRoute.toString().replaceAll("\\[", "").replaceAll("\\]","");
+					int pos = allRoutes.indexOf(listedRoute)-2;
+					routeID = allRoutes.get(pos);
+				}
+				
+				if(bool ==true){
+					for(int b = 0; b < currRouteAllData.size()-2 ; b+=2){
+						try{
+						ArrayList<String> rowData = new ArrayList<String>();
+						rowData.add(currRouteAllData.get(0).get(0));
+						rowData.add(currRouteAllData.get(0).get(1));
+						rowData.add(routeID);
+						
+						String stationLeftVal = currRouteAllData.get(b).get(3);
+						int stationLeftPos = allStations.indexOf(stationLeftVal)-1;
+						rowData.add(allStations.get(stationLeftPos));
+						
+						rowData.add(currRouteAllData.get(b).get(1));
+						
+						String stationArriveVal = currRouteAllData.get(b+1).get(3);
+						int stationArrivePos = allStations.indexOf(stationArriveVal)-1;
+						rowData.add(allStations.get(stationArrivePos));
+						
+						//Date one = dateFormat.parse(currRouteAllData.get(b+1).get(1));
+						//System.out.println(currRouteAllData.get(b+1).get(1));
+						//System.out.println(one);
+						
+						rowData.add(currRouteAllData.get(b+1).get(1));
+						
+						
+						formattedData.add(rowData);
+						}catch (Exception e1) {System.out.println("Failed to parse dattime");}
+						
+					}
+				
+					}
+				
+				
+				
+				
+			}
+				//System.out.println(pos);
+			
+		SQLDatabase.addNewJourneys(formattedData, "INSERT INTO Journey (Unit_No, Journey_Started_Time_Stamp, Route_ID, Station_Left, Station_Left_Time_Stamp, Station_Arrived, Station_Arrived_Time_Stamp) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+			
+			//for(int a = 0; a < formattedData.size(); a++)
+			//	System.out.println(formattedData.get(a));
+			
+			String[] results = new String[4];
+		
+			return results;
+		}
+}

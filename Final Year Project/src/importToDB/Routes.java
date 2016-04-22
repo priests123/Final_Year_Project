@@ -71,9 +71,11 @@ public class Routes {
 					uniqueRoutes.remove(uniqueRoutes.get(d));
 					if(uniqueRoutes.size() == 0)
 						break;
-					if((routeStart.equals(uniqueRoutes.get(d).get(0))) && (routeEnd.equals(uniqueRoutes.get(d).get(uniqueRoutes.get(d).size()-1)))){
-						currUniqueRoute.add(uniqueRoutes.get(d));
-						uniqueRoutes.remove(uniqueRoutes.get(d));}
+					
+				//	if((routeStart.equals(uniqueRoutes.get(d).get(0))) && (routeEnd.equals(uniqueRoutes.get(d).get(uniqueRoutes.get(d).size()-1)))){
+				//		currUniqueRoute.add(uniqueRoutes.get(d));
+				//		uniqueRoutes.remove(uniqueRoutes.get(d));
+				//	}
 				}
 			}
 			//System.out.println(currUniqueRoute);
@@ -251,11 +253,11 @@ public class Routes {
 						
 					}else{a+=2;}
 				}
-				if(uniqueRoutesInFile.size() > 1){
+				//if(uniqueRoutesInFile.size() > 1){
 					SQLDatabase.addNewRoutes(uniqueRoutesInFile, "INSERT INTO Route (Route_Name, Route_Listed) VALUES (?, ?)");
-				} else {
-					System.out.println("There were no new routes to be added");
-				}
+				//} else {
+				//	System.out.println("There were no new routes to be added");
+				//}
 				
 				
 		
