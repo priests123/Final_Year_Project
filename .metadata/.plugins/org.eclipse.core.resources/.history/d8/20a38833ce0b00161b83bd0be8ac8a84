@@ -3,10 +3,7 @@ package Display;
 import importToDB.ReadInFile;
 import importToDB.SQLDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class checkFile {
 	
@@ -27,22 +24,10 @@ public class checkFile {
 	public static Boolean checkNotDuplicate(){
 	
 		ArrayList<ArrayList<String>> firstLine = ReadInFile.readFirstLine(formattedFileLocation);
+		
 		String unitNo = firstLine.get(0).get(0);
-		SimpleDateFormat formatterOrigional = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		SimpleDateFormat formatterNew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date dateJourneyStarted = null;
-		try {
-			dateJourneyStarted = formatterOrigional.parse(firstLine.get(0).get(1));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		String journeyStart = formatterNew.format(dateJourneyStarted);
-		String stationLeft = formatterNew.format(dateJourneyStarted);
+		String journeyStart = firstLine.get(0).get(1);
+		String stationLeft = firstLine.get(0).get(1);
 		//System.out.println(unitNo);
 		//System.out.println(journeyStart);
 		//System.out.println(stationLeft);

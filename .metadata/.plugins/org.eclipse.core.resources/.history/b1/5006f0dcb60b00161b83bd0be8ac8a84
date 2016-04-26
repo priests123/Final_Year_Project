@@ -18,24 +18,25 @@ public class SQLDatabase {
 	
 	public static void OpenConnection() {
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName("com.mysql.jdbc.Drivr");
 		} catch (ClassNotFoundException e1) {
-			System.out.println("No associated SQL driver");
+			System.out.println("No associated SQL driver, please install the mysql driver");
 			e1.printStackTrace();
 		}
 		
-		String URL = "jdbc:sqlserver://mpp11-fyp.database.windows.net:1433;database=Rail_Transportation;user=mpp11@mpp11-fyp;password=BananaApple09!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";			
-		
+		/*String URL = "jdbc:sqlserver://localhost:1433;DatabaseName=RailTransportation";			
+		String user = "Rail";
+		String pass = "Rail";
 		
 		try {
-			DBConn = DriverManager.getConnection(URL);
+			DBConn = DriverManager.getConnection(URL,user,pass);
 		} catch (SQLException e) {
 			System.out.println("No connection to RailTransportation database");
 			e.printStackTrace();
 		}
 		if(!DBConn.equals(null)){
 			System.out.println("Connected to the Rail Transportation Database");
-		}
+		}*/
 	}
 	
 	public static ArrayList<String> selectAllFromStation(String sql, int noOfColumns){

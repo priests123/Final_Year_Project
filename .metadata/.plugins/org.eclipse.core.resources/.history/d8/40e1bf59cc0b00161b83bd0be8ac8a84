@@ -22,7 +22,7 @@ public class Main {
 		SQLDatabase.OpenConnection();
 		
 		
-		Main.displayStasticsGUI();
+		//Main.displayStasticsGUI();
 		
 		
 		

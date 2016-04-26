@@ -21,9 +21,10 @@ public class Main {
 		
 		SQLDatabase.OpenConnection();
 		
-		
+		//String fileLcoation = "C:\\Users\\Michael\\Desktop\\Datasets\\465236.csv";
+		// FormatFile.FormatCSV(fileLcoation);
 		Main.displayStasticsGUI();
-		
+		//Main.displayImportSummaryGUI();
 		
 		
 		 

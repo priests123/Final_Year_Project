@@ -24,11 +24,12 @@ public class SQLDatabase {
 			e1.printStackTrace();
 		}
 		
-		String URL = "jdbc:sqlserver://mpp11-fyp.database.windows.net:1433;database=Rail_Transportation;user=mpp11@mpp11-fyp;password=BananaApple09!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";			
-		
+		String URL = "jdbc:sqlserver://mpp11-fyp.database.windows.net:1433; database=Rail_Transportation";			
+		String user = "user=mpp11@mpp11-fyp;";
+		String pass = "BananApple09!;";
 		
 		try {
-			DBConn = DriverManager.getConnection(URL);
+			DBConn = DriverManager.getConnection(URL,user,pass);
 		} catch (SQLException e) {
 			System.out.println("No connection to RailTransportation database");
 			e.printStackTrace();
