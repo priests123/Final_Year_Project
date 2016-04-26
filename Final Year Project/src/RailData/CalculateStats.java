@@ -59,6 +59,7 @@ public class CalculateStats {
 				loopCount++;
 			} catch (ParseException e) {}
 		}
+		
 		return dateFormat.format(timeTotal / loopCount);
 	}
 	

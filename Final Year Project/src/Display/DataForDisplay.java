@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+
 import importToDB.SQLDatabase;
 
 public class DataForDisplay {
@@ -43,10 +44,20 @@ public class DataForDisplay {
 				Date dateToNew = formatterOrigional.parse(dateTimeTo);
 				results = SQLDatabase.usrSearch(baseSQL + " AND Journey_Started_Time_Stamp <= ?", "justToDateTime", routeSelected, dateTimeFrom, formatterNew.format(dateToNew));
 			}catch(Exception e){}
-			}
-		//System.out.println(results);
+		}
+		
+		StatisticsGUI.clearDataView();
+		if(results.size() > 0)
+		{
+		
+		
+		
 		ArrayList<ArrayList<String>> finalResultsToPrint = new ArrayList<ArrayList<String>>();
+		
+
+		
 		int count = 0;
+		String firstStationJourney = null;
 		while(results.size() > count){
 			String currInstanceStartTime = results.get(count).get(1);
 			ArrayList<ArrayList<String>> currInstanceRoute = new ArrayList<ArrayList<String>>();
@@ -58,12 +69,15 @@ public class DataForDisplay {
 				}
 			}
 		
-		
+		//int noOfStops = 0;
 		
 		
 		for(int m = 0; m < currInstanceRoute.size(); m++){
 			ArrayList<String> resultsRow = new ArrayList<String>();
 			String stationJourneyName = currInstanceRoute.get(m).get(3) + " to " + currInstanceRoute.get(m).get(5);
+			if(m == 0){
+				firstStationJourney = stationJourneyName;
+			}
 			resultsRow.add(stationJourneyName);
 			String leftTime = reformatDateTime(currInstanceRoute.get(m).get(4));
 			resultsRow.add(leftTime);
@@ -71,18 +85,155 @@ public class DataForDisplay {
 			resultsRow.add(arrivedTime);
 			resultsRow.add(calTimeTaken(leftTime, arrivedTime));
 			if(m == 0){
-				resultsRow.add("N/A");
+				resultsRow.add(" N/A");
+				
 			}else{
 				resultsRow.add(calStopTime(reformatDateTime(currInstanceRoute.get(m-1).get(6)), reformatDateTime(currInstanceRoute.get(m).get(4))));
+				
 			}
 			resultsRow.add(calElapsedTime(reformatDateTime(currInstanceRoute.get(0).get(1)), reformatDateTime(currInstanceRoute.get(m).get(6))));
-			
 			finalResultsToPrint.add(resultsRow);
 		}
-		System.out.println(finalResultsToPrint);
+		
+		
+
+		//System.out.println(finalResultsToPrint);
+		}
+		
+		StatisticsGUI.addToDataViewFont1(String.format("%-40s", "Stations"));
+		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Time Left"));
+		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Time Arrived"));
+		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Time Travel(mm:ss)"));
+		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Stop Time(mm:ss)"));
+		StatisticsGUI.addToDataViewFont1(String.format("%s", "Time Elapsed(hh:mm:ss)"));
+		StatisticsGUI.addToDataViewFont1("\n");
+		
+		for(int b = 0; b < finalResultsToPrint.size(); b++){
+			
+			if(finalResultsToPrint.get(b).get(0).equals(firstStationJourney)){
+				for(int a = 0; a < 220; a++)
+					StatisticsGUI.addToDataViewFont2("-");
+				StatisticsGUI.addToDataViewFont1("\n");
+			}
+			
+			StatisticsGUI.addToDataViewFont2(String.format("%-54s", finalResultsToPrint.get(b).get(0).toString()));
+			StatisticsGUI.addToDataViewFont2(String.format("%-34s", finalResultsToPrint.get(b).get(1).toString()));
+			StatisticsGUI.addToDataViewFont2(String.format("%-41s", finalResultsToPrint.get(b).get(2).toString()));
+			StatisticsGUI.addToDataViewFont2(String.format("%-31s", finalResultsToPrint.get(b).get(3).toString()));
+			StatisticsGUI.addToDataViewFont2(String.format("%-34s", finalResultsToPrint.get(b).get(4).toString()));
+			StatisticsGUI.addToDataViewFont2(String.format("%s", finalResultsToPrint.get(b).get(5).toString()));
+			StatisticsGUI.addToDataViewFont2("\n");
+			
+			
 		}
 		
 		
+		
+		
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-50s", ""));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-40s", "Travel Time"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-40s", "Stop Time"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%s", "Elapsed Time"));
+		StatisticsGUI.addToDataViewStatsFont1("\n");
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-40s", "Stations"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Min"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Max"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Avg"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-16s", "Median"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Min"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Max"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Avg"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-16s", "Median"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Min"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Max"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Avg"));
+		StatisticsGUI.addToDataViewStatsFont1(String.format("%-8s", "Median"));
+		StatisticsGUI.addToDataViewStatsFont1("\n");
+		for(int a = 0; a < 220; a++)
+			StatisticsGUI.addToDataViewStatsFont2("-");
+		StatisticsGUI.addToDataViewFont1("\n");
+		
+		
+		
+		ArrayList<ArrayList<String>> stationsTimesForStats = new ArrayList<ArrayList<String>>();
+		for(int a = 0; a < finalResultsToPrint.size(); a++){
+			if(finalResultsToPrint.get(a).get(0).equals(firstStationJourney) && a != 0){
+				break;
+			}else{
+				String currStations = finalResultsToPrint.get(a).get(0);
+				ArrayList<String> currStationsTimes = new ArrayList<String>();
+				currStationsTimes.add(currStations);
+				for(int b = 0; b < finalResultsToPrint.size(); b++){
+					if(finalResultsToPrint.get(b).get(0).equals(currStations)){
+						currStationsTimes.add(finalResultsToPrint.get(b).get(3));
+						currStationsTimes.add(finalResultsToPrint.get(b).get(4));
+						currStationsTimes.add(finalResultsToPrint.get(b).get(5));
+					}
+				}
+				stationsTimesForStats.add(currStationsTimes);
+			}
+		
+		}
+		
+		
+		
+		ArrayList<ArrayList<String>> finalStatisticsToPrint = new ArrayList<ArrayList<String>>();
+		
+		for(int c = 0; c < stationsTimesForStats.size(); c++){
+			ArrayList<String> statsRow = new ArrayList<String>();
+			statsRow.add(stationsTimesForStats.get(c).get(0));
+			statsRow.add(CalStatistics.calMinMax(stationsTimesForStats, "min", c, 1, "mm:ss"));
+			statsRow.add(CalStatistics.calMinMax(stationsTimesForStats, "max", c, 1, "mm:ss"));
+			statsRow.add(CalStatistics.calAverage(stationsTimesForStats, c, 1, "mm:ss"));
+			statsRow.add(CalStatistics.calMedian(stationsTimesForStats, c, 1, "mm:ss"));
+			statsRow.add(CalStatistics.calMinMax(stationsTimesForStats, "min", c, 2, "mm:ss"));
+			statsRow.add(CalStatistics.calMinMax(stationsTimesForStats, "max", c, 2, "mm:ss"));
+			statsRow.add(CalStatistics.calAverage(stationsTimesForStats, c, 2, "mm:ss"));
+			statsRow.add(CalStatistics.calMedian(stationsTimesForStats, c, 2, "mm:ss"));
+			statsRow.add(CalStatistics.calMinMax(stationsTimesForStats, "min", c, 3, "HH:mm:ss"));
+			statsRow.add(CalStatistics.calMinMax(stationsTimesForStats, "max", c, 3, "HH:mm:ss"));
+			statsRow.add(CalStatistics.calAverage(stationsTimesForStats, c, 3, "HH:mm:ss"));
+			statsRow.add(CalStatistics.calMedian(stationsTimesForStats, c, 3, "HH:mm:ss"));
+			
+			finalStatisticsToPrint.add(statsRow);
+		}
+		
+		StatisticsGUI.addToDataViewStatsFont1("\n");
+		for(int d = 0; d < finalStatisticsToPrint.size(); d++){
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-57s", finalStatisticsToPrint.get(d).get(0).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-11s", finalStatisticsToPrint.get(d).get(1).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-11s", finalStatisticsToPrint.get(d).get(2).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-14s", finalStatisticsToPrint.get(d).get(3).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-21s", finalStatisticsToPrint.get(d).get(4).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-12s", finalStatisticsToPrint.get(d).get(5).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-11s", finalStatisticsToPrint.get(d).get(6).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-13s", finalStatisticsToPrint.get(d).get(7).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-20s", finalStatisticsToPrint.get(d).get(8).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-11s", finalStatisticsToPrint.get(d).get(9).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-12s", finalStatisticsToPrint.get(d).get(10).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%-13s", finalStatisticsToPrint.get(d).get(11).toString()));
+			StatisticsGUI.addToDataViewStatsFont2(String.format("%s", finalStatisticsToPrint.get(d).get(12).toString()));
+			
+			
+			
+			
+			
+			
+			
+			StatisticsGUI.addToDataViewStatsFont2("\n");
+		}
+		
+		
+		
+		
+		
+		
+		
+		}else{
+			StatisticsGUI.addToDataViewFont1(String.format("No results found. Please alter your selections"));
+		}
+		
+		StatisticsGUI.setScrollPos();
 	}
 	
 	public static String reformatDateTime(String dateTime){

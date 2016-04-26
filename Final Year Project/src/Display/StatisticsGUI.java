@@ -12,6 +12,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import javax.xml.bind.JAXBElement.GlobalScope;
 
 
@@ -49,15 +53,22 @@ public class StatisticsGUI extends Component{
 	Calendar cal = Calendar.getInstance();
 	private JLabel lblIntro = new JLabel();
 	private JLabel lblIntro2 = new JLabel();
+	private JLabel lblIntro3 = new JLabel();
 	private JLabel lblRoute = new JLabel();
 	private JLabel lblDateFrom = new JLabel();
 	private JLabel lblTimeFrom = new JLabel();
 	private JLabel lblDateTo = new JLabel();
 	private JLabel lblTimeTo = new JLabel();
 	private JLabel logo = new JLabel();
+	private JLabel lblRouteStatistics = new JLabel();
 	private static JLabel errorMsg = new JLabel();
 	ArrayList<String> values = new ArrayList<String>();
-	private JTextArea dataView = new JTextArea();
+	private static JTextPane dataView = new JTextPane();
+	private static JScrollPane dataViewScroll = new JScrollPane(dataView);
+	private static StyledDocument doc = dataView.getStyledDocument();
+	private static JTextPane dataViewStats = new JTextPane();
+	private static JScrollPane dataViewScrollStats = new JScrollPane(dataViewStats);
+	private static StyledDocument doc2 = dataViewStats.getStyledDocument();
 	
 	private JButton theBtDateFrom = new JButton(Names.DATEFROM);
 	private JTextField tfDateFrom = new JTextField();
@@ -88,22 +99,27 @@ public class StatisticsGUI extends Component{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = screenSize.height;
 		int width = screenSize.width;
-		int H = 900;
+		int H = 1000;
 		int W = 1600;
 		rootWindow.setSize(W, H);
-		rootWindow.setLocation((width / 2 - W/2), (height / 2 - H/2));
+		rootWindow.setLocation((width / 2 - W/2), (height / 2 - H/2) - H/40);
 		
 		
 
 		lblIntro.setBounds(10, 10, 1200, 20);
-		lblIntro.setText("Welcome to understanding your routes. To get started, use the below route, date & time selectors to set what data you'd like to see. Then click search to see the current timing data for");
+		lblIntro.setText("Welcome to understanding your routes. To get started, use the below route, date & time selectors to set your search parameters, then click search. This displays all of the route");
 		lblIntro.setFont(Global.font2);
 		cp.add(lblIntro);
 		
 		lblIntro2.setBounds(10, 27, 1200, 20);
-		lblIntro2.setText("the route. To import new data into the system, click the import button on the right hand side.");
+		lblIntro2.setText("information that is in the system in the top box, and a summary of the statistics for the route based on this data at the bottom. To import new data into the system, click the import");
 		lblIntro2.setFont(Global.font2);
 		cp.add(lblIntro2);
+		
+		lblIntro3.setBounds(10, 44, 1200, 20);
+		lblIntro3.setText("button on the right hand side and follow the on screen instructions.");
+		lblIntro3.setFont(Global.font2);
+		cp.add(lblIntro3);
 		
 		logo.setIcon(new ImageIcon("logo.png"));
 		logo.setBounds(1283, 0, 300, 150);
@@ -205,13 +221,27 @@ public class StatisticsGUI extends Component{
 		cp.add(theBtImport);
 		
 		
-		dataView.setBounds(10, 170, 1560, 670);
-		dataView.setFont(Global.font2);
-		cp.add(dataView);
+		dataViewScroll.setBounds(10, 170, 1560, 480);
+		//dataViewScroll.setFont(Global.font4);
+		dataViewScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		dataViewScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
+		dataView.setEditable(false);
+		dataView.setFont(Global.font4);
+		cp.add(dataViewScroll);
 		
+		lblRouteStatistics.setBounds(10, 665, 200, 30);
+		lblRouteStatistics.setText("Route Statistics");
+		lblRouteStatistics.setFont(Global.font1);
+		cp.add(lblRouteStatistics);
 		
-		
+		dataViewScrollStats.setBounds(10, 695, 1560, 250);
+		//dataViewScroll.setFont(Global.font4);
+		dataViewScrollStats.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		dataViewScrollStats.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		dataViewStats.setEditable(false);
+		dataViewStats.setFont(Global.font4);
+		cp.add(dataViewScrollStats);
 		
 		rootWindow.setVisible(true);
 		
@@ -233,14 +263,15 @@ public class StatisticsGUI extends Component{
 			timeFromSpinner.setValue(dateStartSpinner);
 			tfDateTo.setText("");
 			timeToSpinner.setValue(dateStartSpinner);
+			clearDataView();
 		}
 	
 		if(c == theBtDateFrom){
-			tfDateFrom.setText(new DatePicker(frameDateFrom, 660, 280, "Date from").setPickedDate());
+			tfDateFrom.setText(new DatePicker(frameDateFrom, 660, 205, "Date from").setPickedDate());
 		}
 		
 		if(c == theBtDateTo){
-			tfDateTo.setText(new DatePicker(frameDateTo, 945, 280, "Date to").setPickedDate());
+			tfDateTo.setText(new DatePicker(frameDateTo, 945, 205, "Date to").setPickedDate());
 		}
 
 		if(actionIs.equals(Names.SEARCH)){
@@ -267,5 +298,78 @@ public static void setErrorMsg(String msg){
 	errorMsg.setText(msg);
 }
 
+public static void addToDataViewFont1(String toPrint){
+	
+	
+	Style style = dataView.addStyle("", null);
+	StyleConstants.setFontSize(style, 16);
+	StyleConstants.setBold(style, true);
+	try {
+		doc.insertString(doc.getLength(), toPrint, style);
+	} catch (BadLocationException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	//dataView.append(toPrint);
+}
+
+public static void addToDataViewFont2(String toPrint){
+	
+	Style style = dataView.addStyle("", null);
+	StyleConstants.setFontSize(style, 12);
+	try {
+		doc.insertString(doc.getLength(), toPrint, style);
+	} catch (BadLocationException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	//dataView.append(toPrint);
+	
+	
+}
+
+public static void clearDataView(){
+	dataView.setText("");
+	dataViewStats.setText("");
+}
+
+
+public static void addToDataViewStatsFont1(String toPrint){
+
+	Style style = dataViewStats.addStyle("", null);
+	StyleConstants.setFontSize(style, 16);
+	StyleConstants.setBold(style, true);
+	try {
+		doc2.insertString(doc2.getLength(), toPrint, style);
+	} catch (BadLocationException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	//dataView.append(toPrint);
+}
+
+public static void addToDataViewStatsFont2(String toPrint){
+	
+	Style style = dataViewStats.addStyle("", null);
+	StyleConstants.setFontSize(style, 12);
+	try {
+		doc2.insertString(doc2.getLength(), toPrint, style);
+	} catch (BadLocationException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	//dataView.append(toPrint);
+	
+	
+}
+
+public static void setScrollPos(){
+	dataView.setCaretPosition(0);
+	dataViewStats.setCaretPosition(0);
+}
 	
 }
