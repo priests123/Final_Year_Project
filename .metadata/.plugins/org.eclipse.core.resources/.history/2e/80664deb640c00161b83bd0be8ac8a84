@@ -1,0 +1,134 @@
+package Display;
+
+import importToDB.FormatFile;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ImportGUI {
+	
+	private JLabel introMsg = new JLabel();
+	private JLabel introMsg2 = new JLabel();
+	private JLabel errorMsg = new JLabel();
+	private JButton theBtBrowse = new JButton(Names.BROWSE);
+	private JLabel browseLabel = new JLabel();
+	private JButton theBtImport = new JButton(Names.IMPORT);
+	private JButton theBtCancel = new JButton(Names.CANCEL);
+	private Actions theCB = new Actions();
+	private static Container rootWindow;
+	private static String fileToImportLocation = null;
+
+	public ImportGUI(RootPaneContainer rpc) {
+		
+		Container cp = rpc.getContentPane();
+		rootWindow = (Container) rpc;
+		cp.setLayout(null);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = screenSize.height;
+		int width = screenSize.width;
+		int H = height/3;
+		int W = (width/2) - (width/8);
+		rootWindow.setSize(W, H);
+		rootWindow.setLocation((width / 2 - W/2), (height / 2 - H/2));
+		
+		browseLabel.setBounds(280, 160, 289, 30);
+		browseLabel.setText("No file selected");
+		browseLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		browseLabel.setVerticalAlignment(SwingConstants.CENTER);
+		browseLabel.setBackground(Color.WHITE);
+		browseLabel.setOpaque(true);
+		browseLabel.setFont(Global.font1);
+		cp.add(browseLabel);
+		
+		theBtBrowse.setBounds(150, 160, 100, 30);
+		theBtBrowse.addActionListener(theCB);
+		theBtBrowse.setFont(Global.font2);
+		cp.add(theBtBrowse);
+		
+		theBtImport.setBounds(173, 250, 100, 30);
+		theBtImport.addActionListener(theCB);
+		theBtImport.setFont(Global.font2);
+		cp.add(theBtImport);
+		
+		theBtCancel.setBounds(446, 250, 100, 30);
+		theBtCancel.addActionListener(theCB);
+		theBtCancel.setFont(Global.font2);
+		cp.add(theBtCancel);
+		
+		errorMsg.setBounds(60, 95, 580, 30);
+		errorMsg.setHorizontalAlignment(SwingConstants.CENTER);
+		errorMsg.setVerticalAlignment(SwingConstants.CENTER);
+		errorMsg.setForeground(Color.RED);
+		errorMsg.setFont(Global.font1);
+		cp.add(errorMsg);
+		
+		introMsg.setBounds(60, 20, 580, 30);
+		introMsg.setText("Please select a file to upload to the system " + 
+						 "by clicking the browse button below. Please ");
+		introMsg.setHorizontalAlignment(SwingConstants.CENTER);
+		introMsg.setFont(Global.font2);
+		cp.add(introMsg);
+		introMsg2.setBounds(60, 40, 580, 30);
+		introMsg2.setText("ensure that it's a CSV file, it's the correct " + 
+						  "format and it's not been uploaded before.");
+		introMsg2.setHorizontalAlignment(SwingConstants.CENTER);
+		introMsg2.setFont(Global.font2);
+		cp.add(introMsg2);
+		
+		rootWindow.setVisible( true );    
+		
+	}
+	
+	class Names {
+		
+		public static final String IMPORT = "Import";
+		public static final String CANCEL = "Cancel";
+		public static final String BROWSE = "Browse";
+		
+	}
+	
+	class Actions implements ActionListener{
+		
+		public void actionPerformed(ActionEvent ae) {
+			String actionIs = ae.getActionCommand();
+			errorMsg.setText("");
+			
+			if(actionIs.equals(Names.BROWSE)){
+				OpenFile of = new OpenFile();
+				of.filePicked();
+				int fileNameIndex = of.sb.toString().lastIndexOf("\\");
+				browseLabel.setText(of.sb.substring(fileNameIndex + 1));
+				fileToImportLocation = of.sb.toString();
+			}
+			
+			if(actionIs.equals(Names.IMPORT)){
+				if(!(fileToImportLocation == null)){
+					if(CheckFile.checkCSVType(fileToImportLocation)){
+						if(CheckFile.checkCSVFormat()){
+							if(CheckFile.checkNotDuplicate()){		
+								FormatFile.FormatCSV(CheckFile.getFormattedFileLocation());
+								rootWindow.setVisible(false);
+								Main.displayImportSummaryGUI();
+							}else{
+								errorMsg.setText("This file has already been uploaded, please select another");
+							}
+						}else{
+							errorMsg.setText("Please ensure the file is correctly formatted");
+						}
+					}else{
+						errorMsg.setText("This file isn't a CSV file, please select one");
+					}
+				}else{
+					errorMsg.setText("Please select a file to import");
+				}
+			}
+			
+			if(actionIs.equals(Names.CANCEL)){
+				rootWindow.setVisible(false);
+				StatisticsGUI.setStatisticsGUIVisible();
+			}
+			
+		}
+	}
+	
+}

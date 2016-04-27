@@ -1,0 +1,23 @@
+package uyr;
+
+import java.util.ArrayList;
+
+//When values are inputted into the database, the count of values added are stored and added here
+public class DBInputResponses {
+
+	private static ArrayList<String> inputResponses = new ArrayList<String>();
+	
+	//Add values to the 
+	public static void addInputResponses(String message){
+		inputResponses.add(message);
+	}
+	
+	public static ArrayList<String> getInputResponses(){
+		return inputResponses;
+	}
+	
+	public static void clearInputResponses(){
+		inputResponses.clear();
+	}
+	
+}
