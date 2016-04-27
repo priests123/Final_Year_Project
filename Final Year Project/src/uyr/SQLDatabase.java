@@ -8,7 +8,7 @@ public class SQLDatabase {
 	private static Connection DBConn;
 	
 	//Establishes the connection to the database
-	public static void OpenConnection() {
+	public static void openConnection() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (ClassNotFoundException e) {

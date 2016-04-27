@@ -12,12 +12,12 @@ import javax.swing.*;
  
 class DatePicker {
 	
-	int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
-	int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
-	JLabel l = new JLabel("", JLabel.CENTER);
-	String day = "";
-	JDialog d;
-	JButton[] button = new JButton[49];
+	public int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
+	public int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
+	public JLabel label = new JLabel("", JLabel.CENTER);
+	public String day = "";
+	public JDialog d;
+	public JButton[] button = new JButton[49];
 	
 	//Produces the calendar for a user to select a date
 	public DatePicker(JFrame parent, int X, int Y, String name) {
@@ -62,7 +62,7 @@ class DatePicker {
 	    p2.add(previous);
 	     
 	    // Current month label between the previous and next buttons
-	    p2.add(l);
+	    p2.add(label);
 	     
 	    // Next month button
 	    JButton next = new JButton("Next >>");
@@ -101,7 +101,7 @@ class DatePicker {
 	      button[x].setFont(new Font("Arial", Font.PLAIN, 10));
 	    }
 	   
-	    l.setText(sdf.format(cal.getTime()));
+	    label.setText(sdf.format(cal.getTime()));
 	}
  
 	//Returns the values selected by the user

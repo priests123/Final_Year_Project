@@ -10,11 +10,11 @@ public class ImportGUI {
 	private JLabel introMsg = new JLabel();
 	private JLabel introMsg2 = new JLabel();
 	private JLabel errorMsg = new JLabel();
-	private JButton theBtBrowse = new JButton(Names.BROWSE);
+	private JButton theBtBrowse = new JButton(NamesImport.BROWSE);
 	private JLabel browseLabel = new JLabel();
-	private JButton theBtImport = new JButton(Names.IMPORT);
-	private JButton theBtCancel = new JButton(Names.CANCEL);
-	private Actions theCB = new Actions();
+	private JButton theBtImport = new JButton(NamesImport.IMPORT);
+	private JButton theBtCancel = new JButton(NamesImport.CANCEL);
+	private ActionsImport theCB = new ActionsImport();
 	private static Container rootWindow;
 	private static String fileToImportLocation = null;
 
@@ -81,7 +81,7 @@ public class ImportGUI {
 	}
 	
 	//Values for the button names
-	class Names {
+	class NamesImport {
 		
 		public static final String IMPORT = "Import";
 		public static final String CANCEL = "Cancel";
@@ -90,13 +90,13 @@ public class ImportGUI {
 	}
 	
 	//The action listeners for the buttons
-	class Actions implements ActionListener{
+	class ActionsImport implements ActionListener{
 		
 		public void actionPerformed(ActionEvent ae) {
 			String actionIs = ae.getActionCommand();
 			errorMsg.setText("");
 			
-			if(actionIs.equals(Names.BROWSE)){
+			if(actionIs.equals(NamesImport.BROWSE)){
 				OpenFile of = new OpenFile();
 				of.filePicked();
 				int fileNameIndex = of.sb.toString().lastIndexOf("\\");
@@ -104,12 +104,12 @@ public class ImportGUI {
 				fileToImportLocation = of.sb.toString();
 			}
 			
-			if(actionIs.equals(Names.IMPORT)){
+			if(actionIs.equals(NamesImport.IMPORT)){
 				if(!(fileToImportLocation == null)){
 					if(CheckFile.checkCSVType(fileToImportLocation)){
 						if(CheckFile.checkCSVFormat()){
 							if(CheckFile.checkNotDuplicate()){		
-								FormatFileForDB.FormatCSV(CheckFile.getFormattedFileLocation());
+								FormatFileForDB.formatCSV(CheckFile.getFormattedFileLocation());
 								rootWindow.setVisible(false);
 								Main.displayImportSummaryGUI();
 							}else{
@@ -126,7 +126,7 @@ public class ImportGUI {
 				}
 			}
 			
-			if(actionIs.equals(Names.CANCEL)){
+			if(actionIs.equals(NamesImport.CANCEL)){
 				rootWindow.setVisible(false);
 				StatisticsGUI.setStatisticsGUIVisible();
 			}

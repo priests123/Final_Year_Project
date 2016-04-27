@@ -8,7 +8,7 @@ public class FormatFileForDB {
 	//Does all the formatting for a file to be uploaded. This includes formatting the dates to the correct formats,
 	//getting primary key values of routes and stations and mapping it to the values in the CSV &
 	//then the insertion to the database
-	public static String[] FormatCSV(String fileLcoation){
+	public static void formatCSV(String fileLcoation){
 		ArrayList<ArrayList<String>> rawRailDataFile = ReadInFile.readInCSV(fileLcoation);
 			
 		for(int a = 0; a < rawRailDataFile.size(); a++){
@@ -96,9 +96,6 @@ public class FormatFileForDB {
 				"INSERT INTO Journey (Unit_No, Journey_Started_Time_Stamp," + 
 				" Route_ID, Station_Left, Station_Left_Time_Stamp, Station_Arrived," + 
 				" Station_Arrived_Time_Stamp) VALUES (?, ?, ?, ?, ?, ?, ?)");
-
-		String[] results = new String[4];
-		return results;
 	}
 	
 }

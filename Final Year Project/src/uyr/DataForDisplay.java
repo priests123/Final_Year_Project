@@ -5,7 +5,7 @@ import java.util.*;
 
 public class DataForDisplay {
 
-	static ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
+	private static ArrayList<ArrayList<String>> results;
 	
 	//Constructor for the class, when the user searches this looks up in the dataabse based on their terms.
 	//Depending on what the user is searching, like with or with dates/times will depend on which query is used.

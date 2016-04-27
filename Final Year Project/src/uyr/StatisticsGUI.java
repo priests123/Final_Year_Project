@@ -11,14 +11,14 @@ public class StatisticsGUI extends Component{
 
 	private static final long serialVersionUID = 1L;
 	private static Container rootWindow;
-	private Actions theCB = new Actions();
+	private ActionsStatistics theCB = new ActionsStatistics();
 	private JLabel lblIntro = new JLabel();
 	private JLabel lblIntro2 = new JLabel();
 	private JLabel lblIntro3 = new JLabel();
 	private static JLabel errorMsg = new JLabel();
-	private JButton theBtImport = new JButton(Names.IMPORT);	
-	private JButton theBtSearch = new JButton(Names.SEARCH);
-	private JButton theBtClear = new JButton(Names.CLEAR);
+	private JButton theBtImport = new JButton(NamesStatistics.IMPORT);	
+	private JButton theBtSearch = new JButton(NamesStatistics.SEARCH);
+	private JButton theBtClear = new JButton(NamesStatistics.CLEAR);
 	private JLabel logo = new JLabel();
 	private JLabel lblRoute = new JLabel();
 	private JLabel lblDateFrom = new JLabel();
@@ -27,13 +27,13 @@ public class StatisticsGUI extends Component{
 	private JLabel lblTimeTo = new JLabel();
 	private JComboBox<String> routeSelect = new JComboBox<String>();
 	private JTextField tfDateFrom = new JTextField();
-	private JButton theBtDateFrom = new JButton(Names.DATEFROM);
+	private JButton theBtDateFrom = new JButton(NamesStatistics.DATEFROM);
 	private JFrame frameDateFrom = new JFrame();
 	private SpinnerDateModel smFrom = new SpinnerDateModel();
 	private JSpinner timeFromSpinner = new JSpinner(smFrom);
 	private JSpinner.DateEditor deFrom = new JSpinner.DateEditor(timeFromSpinner, "HH:mm:ss");
 	private JTextField tfDateTo = new JTextField();
-	private JButton theBtDateTo = new JButton(Names.DATETO);
+	private JButton theBtDateTo = new JButton(NamesStatistics.DATETO);
 	private JFrame frameDateTo = new JFrame();
 	private SpinnerDateModel smTo = new SpinnerDateModel();
 	private JSpinner timeToSpinner = new JSpinner(smTo);
@@ -52,9 +52,9 @@ public class StatisticsGUI extends Component{
 	public static String timeTo = "";
 	public static String dateTimeFrom = "";
 	public static String dateTimeTo = "";
-	Calendar cal = Calendar.getInstance();
-	Date dateStartSpinner = cal.getTime();
-	ArrayList<String> dropdownRouteValues = new ArrayList<String>();
+	public Calendar cal = Calendar.getInstance();
+	public Date dateStartSpinner = cal.getTime();
+	public ArrayList<String> dropdownRouteValues = new ArrayList<String>();
 
 	//Creates the SummaryGUI
 	public StatisticsGUI(RootPaneContainer rpc) { 
@@ -209,7 +209,7 @@ public class StatisticsGUI extends Component{
 	}
 	
 	//Values for the button names
-	class Names {
+	class NamesStatistics {
 		
 		public static final String IMPORT = "Import";
 		public static final String SEARCH = "Search";
@@ -220,18 +220,18 @@ public class StatisticsGUI extends Component{
 	}
 
 	//The action listeners for the buttons
-	class Actions implements ActionListener{
+	class ActionsStatistics implements ActionListener{
 		
 		public void actionPerformed(ActionEvent ae) {
 			String actionIs = ae.getActionCommand();
 			Object o = ae.getSource();
 
-			if(actionIs.equals(Names.IMPORT)){
+			if(actionIs.equals(NamesStatistics.IMPORT)){
 				rootWindow.setVisible(false);
 				Main.displayImportGUI();
 			}
 		
-			if(actionIs.equals(Names.CLEAR)){
+			if(actionIs.equals(NamesStatistics.CLEAR)){
 			routeSelect.setSelectedIndex(0);
 			tfDateFrom.setText("");
 			timeFromSpinner.setValue(dateStartSpinner);
@@ -248,7 +248,7 @@ public class StatisticsGUI extends Component{
 				tfDateTo.setText(new DatePicker(frameDateTo, 945, 205, "Date to").setPickedDate());
 			}
 
-			if(actionIs.equals(Names.SEARCH)){
+			if(actionIs.equals(NamesStatistics.SEARCH)){
 				routeSelected = routeSelect.getSelectedItem().toString();
 				dateFrom = tfDateFrom.getText();
 				timeFrom = deFrom.getFormat().format(timeFromSpinner.getValue());	

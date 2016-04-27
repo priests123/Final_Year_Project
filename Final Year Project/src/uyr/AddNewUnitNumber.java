@@ -15,7 +15,6 @@ public class AddNewUnitNumber {
 			}
 		}
 		SQLDatabase.addNewUnitNumbers(uniqueUnitNumbersInFile, "INSERT INTO Unit (Unit_No) VALUES (?)");
-
 	}
 	
 }

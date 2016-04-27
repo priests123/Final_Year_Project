@@ -87,7 +87,7 @@ public class ProduceStatistics {
 				statsRow.add(CalStatistics.calMedian(stationsTimesForStats, c, 3, "HH:mm:ss"));
 				finalStatisticsToPrint.add(statsRow);
 			}
-			AddToStatisticsGUI.addSataViewStatisticsValues(finalStatisticsToPrint);
+			AddToStatisticsGUI.addDataViewStatisticsValues(finalStatisticsToPrint);
 		}else{
 			StatisticsGUI.addToDataViewFont1(String.format("No results found. Please alter your selections"));
 		}

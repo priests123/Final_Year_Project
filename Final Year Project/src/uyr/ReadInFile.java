@@ -15,7 +15,7 @@ public class ReadInFile {
 		try {
 			rawFile = new BufferedReader(new FileReader(fileLocation));
 			while ((rawFileLine = rawFile.readLine()) != null) {
-				rawData.add(converttoArrayList(rawFileLine));
+				rawData.add(convertToArrayList(rawFileLine));
 			}
 		} catch (IOException e) {
 			System.out.println("File does not exist");
@@ -34,7 +34,7 @@ public class ReadInFile {
 	//Takes in a row from the CSV and returns it as an arraylist
 	//Splits each row via the comma and places each data item into a position in a arraylist
 	
-	public static ArrayList<String> converttoArrayList(String rawLine) {
+	public static ArrayList<String> convertToArrayList(String rawLine) {
 		ArrayList<String> lineData = new ArrayList<String>();
 		if (rawLine != null) {
 			String[] splitData = rawLine.split("\\s*,\\s*"); // Regular expression to split CSV
@@ -56,7 +56,7 @@ public class ReadInFile {
 		try {
 			firstLine = new BufferedReader(new FileReader(fileLocation));
 			rawFileLine = firstLine.readLine();
-			rawData.add(converttoArrayList(rawFileLine));
+			rawData.add(convertToArrayList(rawFileLine));
 			
 		} catch (IOException e) {
 			e.printStackTrace();

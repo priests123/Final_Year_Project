@@ -10,12 +10,11 @@ public class ImportSummaryGUI {
 	private static Container rootWindow;
 	private JTextArea resultsTextArea = new JTextArea();
 	private JTextArea resultsTextArea2 = new JTextArea();
-	private JButton theBtOk = new JButton(Names.OK);
-	private Actions theCB = new Actions();
+	private JButton theBtOk = new JButton(NamesImportSummary.OK);
+	private ActionsImportSummary theCB = new ActionsImportSummary();
 	
 	//Creates the importSummaryGUI
 	public ImportSummaryGUI(RootPaneContainer rpc) {
-
 		Container cp = rpc.getContentPane();
 		rootWindow = (Container) rpc;
 		cp.setLayout(null);
@@ -51,20 +50,20 @@ public class ImportSummaryGUI {
 	}
 	
 	//Values for the button names
-	class Names {
+	class NamesImportSummary {
 		
 		public static final String OK = "OK";
 		
 	}
 	
 	//The action listeners for the buttons
-	class Actions implements ActionListener{
+	class ActionsImportSummary implements ActionListener{
 		public void actionPerformed(ActionEvent ae) {
 			String actionIs = ae.getActionCommand();
 			
-			if(actionIs.equals(Names.OK)){
+			if(actionIs.equals(NamesImportSummary.OK)){
 				rootWindow.setVisible(false);
-				Main.displayStasticsGUI();
+				Main.displayStatisticsGUI();
 			}
 		}
 	}

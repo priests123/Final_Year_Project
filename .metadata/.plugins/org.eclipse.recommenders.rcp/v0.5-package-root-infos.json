@@ -195,6 +195,19 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "com.mysql.jdbc",
+    "version": {
+      "major": 5,
+      "minor": 1,
+      "micro": 38,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "471bcc236d5d85690046eb69914c271411029ffe",
+    "jarFileModificationDate": "2015-12-02T08:02:04Z",
+    "location": "C:\\Program Files\\Java\\mysql-connector-java-5.1.38\\mysql-connector-java-5.1.38-bin.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "jre",
     "version": {
       "major": 1,

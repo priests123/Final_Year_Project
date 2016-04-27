@@ -60,7 +60,7 @@ public class AddToStatisticsGUI {
 	}
 	
 	//Adds the DataViewStatistics values to StatisticsGUI
-	public static void addSataViewStatisticsValues(ArrayList<ArrayList<String>> finalStatisticsToPrint){
+	public static void addDataViewStatisticsValues(ArrayList<ArrayList<String>> finalStatisticsToPrint){
 		StatisticsGUI.addToDataViewStatsFont1("\n");
 		for(int d = 0; d < finalStatisticsToPrint.size(); d++){
 			StatisticsGUI.addToDataViewStatsFont2(String.format("%-57s", finalStatisticsToPrint.get(d).get(0).toString()));

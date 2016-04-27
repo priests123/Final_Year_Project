@@ -4,8 +4,8 @@ import javax.swing.JFileChooser;
 
 public class OpenFile {
 
-	JFileChooser fileChooser = new JFileChooser("C:\\Users\\Michael\\Desktop");
-	StringBuilder sb = new StringBuilder();
+	public JFileChooser fileChooser = new JFileChooser("C:\\Users\\Michael\\Desktop");
+	public StringBuilder sb = new StringBuilder();
 	
 	//Produces the file selector window when importing a value
 	public void filePicked(){

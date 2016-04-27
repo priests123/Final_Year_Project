@@ -1,5 +1,0 @@
-package Display;
-
-public class BtnNames {
-		public static final String IMPORT = "Import";
-}
