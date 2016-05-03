@@ -136,7 +136,6 @@ public class StatisticsGUI extends Component{
 		
 		tfDateFrom.setBounds(500, 125, 100, 25);
 		tfDateFrom.setFont(Global.font2);
-		tfDateFrom.setEditable(false);
 		cp.add(tfDateFrom);
 		 
 		theBtDateFrom.setBounds(600, 125, 30, 25);
@@ -157,7 +156,6 @@ public class StatisticsGUI extends Component{
 		
 		tfDateTo.setBounds(785, 125, 100, 25);
 		tfDateTo.setFont(Global.font2);
-		tfDateTo.setEditable(false);
 		cp.add(tfDateTo);
 		 
 		theBtDateTo.setBounds(885, 125, 30, 25);

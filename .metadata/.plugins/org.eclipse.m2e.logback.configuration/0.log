@@ -240,3 +240,4 @@ Caused by: java.nio.channels.UnresolvedAddressException: null
 2016-04-19 18:25:01,567 [pool-6-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 8
 2016-04-19 18:25:02,753 [pool-8-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 8
 2016-04-22 09:43:09,184 [main] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 8
+2016-05-03 13:17:06,290 [main] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 8

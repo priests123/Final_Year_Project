@@ -136,7 +136,6 @@ public class StatisticsGUI extends Component{
 		
 		tfDateFrom.setBounds(500, 125, 100, 25);
 		tfDateFrom.setFont(Global.font2);
-		tfDateFrom.setEditable(false);
 		cp.add(tfDateFrom);
 		 
 		theBtDateFrom.setBounds(600, 125, 30, 25);
@@ -157,7 +156,6 @@ public class StatisticsGUI extends Component{
 		
 		tfDateTo.setBounds(785, 125, 100, 25);
 		tfDateTo.setFont(Global.font2);
-		tfDateTo.setEditable(false);
 		cp.add(tfDateTo);
 		 
 		theBtDateTo.setBounds(885, 125, 30, 25);
@@ -256,10 +254,11 @@ public class StatisticsGUI extends Component{
 				timeFrom = deFrom.getFormat().format(timeFromSpinner.getValue());	
 				dateTo = tfDateTo.getText();
 				timeTo = deTo.getFormat().format(timeToSpinner.getValue());
-				if(CheckSearch.checkSearchTerms(routeSelected, dateFrom, timeFrom, dateTo, timeTo)){
-					dateTimeFrom = tfDateFrom.getText() + " " + deFrom.getFormat().format(timeFromSpinner.getValue());
-					dateTimeTo = tfDateTo.getText() + " " + deTo.getFormat().format(timeToSpinner.getValue());
-					new DataForDisplay(routeSelected, dateTimeFrom, dateTimeTo);
+			
+			if(CheckSearch.checkSearchTerms(routeSelected, dateFrom, timeFrom, dateTo, timeTo)){
+				dateTimeFrom = tfDateFrom.getText() + " " + deFrom.getFormat().format(timeFromSpinner.getValue());
+				dateTimeTo = tfDateTo.getText() + " " + deTo.getFormat().format(timeToSpinner.getValue());
+				new DataForDisplay(routeSelected, dateTimeFrom, dateTimeTo);
 			}
 		}		
 	}

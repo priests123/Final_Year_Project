@@ -9,7 +9,7 @@ public class AddToStatisticsGUI {
 		StatisticsGUI.addToDataViewFont1(String.format("%-40s", "Stations"));
 		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Time Left"));
 		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Time Arrived"));
-		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Travel Time(mm:ss)"));
+		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Time Travel(mm:ss)"));
 		StatisticsGUI.addToDataViewFont1(String.format("%-22s", "Stop Time(mm:ss)"));
 		StatisticsGUI.addToDataViewFont1(String.format("%s", "Time Elapsed(hh:mm:ss)"));
 		StatisticsGUI.addToDataViewFont1("\n");

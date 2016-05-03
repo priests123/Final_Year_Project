@@ -84,7 +84,7 @@ public class AddNewRoutes {
 			}
 		}
 		
-		//Have check for if names are the same, loop through finding any that are the same then remove one of them, 
+		//Have check for if names are the same, loop through finding any that are the same then remoe one of them, 
 		//Dartford to London Cannon Street via Barnehurst for example
 		
 		for(int m = 0; m < uniqueRoutesInFile.size(); m+=2){
