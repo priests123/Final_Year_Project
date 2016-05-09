@@ -15,17 +15,17 @@ public class SQLDatabase {
 			System.out.println("No associated SQL driver");
 			e.printStackTrace();
 		}
-		String connectionString = "jdbc:sqlserver://localhost:1433;DatabaseName=RailTransportation;" +
+		/*String connectionString = "jdbc:sqlserver://localhost:1433;DatabaseName=RailTransportation;" +
 				"user=Rail;" +
-				"password=Rail;";
-		/*String connectionString = 
+				"password=Rail;";*/
+		String connectionString = 
 				"jdbc:sqlserver://mpp11-fyp.database.windows.net:1433;database=Rail_Transportation;" + 
 				"user=mpp11@mpp11-fyp;" + 
 				"password=BananaApple09!;" + 
 				"encrypt=true;" + 
 				"trustServerCertificate=false;" + 
 				"hostNameInCertificate=*.database.windows.net;" + 
-				"loginTimeout=30;";	*/		
+				"loginTimeout=30;";			
 		
 		try {
 			DBConn = DriverManager.getConnection(connectionString);

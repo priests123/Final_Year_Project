@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+
 import javax.swing.*;
 import javax.swing.text.*;
 
@@ -55,19 +56,28 @@ public class StatisticsGUI extends Component{
 	public Calendar cal = Calendar.getInstance();
 	public Date dateStartSpinner = cal.getTime();
 	public ArrayList<String> dropdownRouteValues = new ArrayList<String>();
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	int height = screenSize.height;
+	int width = screenSize.width;
+	int viewWidth = 1560;
 
 	//Creates the SummaryGUI
 	public StatisticsGUI(RootPaneContainer rpc) { 
 		Container cp = rpc.getContentPane();
 		rootWindow = (Container) rpc;
 		cp.setLayout(null);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = screenSize.height;
-		int width = screenSize.width;
-		int H = 1000;
-		int W = 1600;
+		int H = height;
+		int W = width;
+		if(W > 1600){
+			W = 1600;
+		}else{
+			viewWidth = width - 50;
+		}
+		if(H > 1000)
+			H = 1000;
+		
 		rootWindow.setSize(W, H);
-		rootWindow.setLocation((width / 2 - W/2), (height / 2 - H/2) - H/40);
+		rootWindow.setLocation(0, 0);
 		
 		lblIntro.setBounds(10, 10, 1200, 20);
 		lblIntro.setText("Welcome to understanding your routes. To get started, use the below route, " + 
@@ -186,9 +196,9 @@ public class StatisticsGUI extends Component{
 		theBtImport.setFont(Global.font1);
 		cp.add(theBtImport);
 		
-		dataViewScroll.setBounds(10, 170, 1560, 480);
+		dataViewScroll.setBounds(10, 170, viewWidth, 480);
 		dataViewScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		dataViewScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		dataViewScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
 		dataView.setEditable(false);
 		dataView.setFont(Global.font4);
@@ -199,9 +209,9 @@ public class StatisticsGUI extends Component{
 		lblRouteStatistics.setFont(Global.font1);
 		cp.add(lblRouteStatistics);
 		
-		dataViewScrollStats.setBounds(10, 695, 1560, 250);
+		dataViewScrollStats.setBounds(10, 695, viewWidth, 250);
 		dataViewScrollStats.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		dataViewScrollStats.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		dataViewScrollStats.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		dataViewStats.setEditable(false);
 		dataViewStats.setFont(Global.font4);
 		cp.add(dataViewScrollStats);
@@ -243,11 +253,11 @@ public class StatisticsGUI extends Component{
 			}
 	
 			if(o == theBtDateFrom){
-				tfDateFrom.setText(new DatePicker(frameDateFrom, 660, 205, "Date from").setPickedDate());
+				tfDateFrom.setText(new DatePicker(frameDateFrom, width/4, (height/4)-100, "Date from").setPickedDate());
 			}
 		
 			if(o == theBtDateTo){
-				tfDateTo.setText(new DatePicker(frameDateTo, 945, 205, "Date to").setPickedDate());
+				tfDateTo.setText(new DatePicker(frameDateTo, (width/5)*2, (height/4)-100, "Date to").setPickedDate());
 			}
 
 			if(actionIs.equals(NamesStatistics.SEARCH)){
