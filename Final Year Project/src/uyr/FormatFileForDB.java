@@ -55,7 +55,9 @@ public class FormatFileForDB {
 				}
 				String listedRoute = currRoute.toString().replaceAll("\\[", "").replaceAll("\\]","");
 				int pos = allRoutes.indexOf(listedRoute)-2;
+				
 				routeID = allRoutes.get(pos);
+		
 			}
 			
 			if(bool ==true){

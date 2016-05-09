@@ -8,12 +8,14 @@ package uyr;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
  
 class DatePicker {
 	
 	public int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
-	public int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
+	public int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+	
 	public JLabel label = new JLabel("", JLabel.CENTER);
 	public String day = "";
 	public JDialog d;
@@ -56,7 +58,7 @@ class DatePicker {
 	    previous.addActionListener(new ActionListener() {
 	      public void actionPerformed(ActionEvent ae) {
 	        month--;
-	        displayDate();
+	        displayDate(false);
 	      }
 	    });
 	    p2.add(previous);
@@ -70,7 +72,7 @@ class DatePicker {
 	    next.addActionListener(new ActionListener() {
 	      public void actionPerformed(ActionEvent ae) {
 	        month++;
-	        displayDate();
+	        displayDate(false);
 	      }
 	    });
 	    p2.add(next);
@@ -79,20 +81,25 @@ class DatePicker {
 	    d.add(p2, BorderLayout.NORTH);
 	    d.pack();
 	   // d.setLocationRelativeTo(parent);
-	    displayDate();
+	    displayDate(true);
 	    d.setLocation(X, Y);
 	    d.setTitle(name);
 	    d.setVisible(true);
 	}
  
-	public void displayDate() {
+	public void displayDate(boolean b) {
 	    for (int x = 7; x < button.length; x++) {
 	      button[x].setText("");
 	    }
-	     
 	    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM yyyy");
 	    java.util.Calendar cal = java.util.Calendar.getInstance();
-	    cal.set(year, month, 1);
+	    if(b){
+	    	cal.set(2015, 0, 1); //Set initial calendar value
+	    	month = 0;
+	    	year = 2015;
+	    }else{
+	    	cal.set(year, month, 1);
+	    }
 	    int dayOfWeek = cal.get(java.util.Calendar.DAY_OF_WEEK);
 	    int daysInMonth = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
 	 
