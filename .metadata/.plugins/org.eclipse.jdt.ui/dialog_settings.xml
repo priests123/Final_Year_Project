@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Program Files\Java\mysql-connector-java-5.1.38" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="F:\New folder\Microsoft JDBC Driver 6.0 for SQL Server\sqljdbc_6.0\enu" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="RefactoringWizard.preview">
 		<item value="600" key="width"/>
 		<item value="400" key="height"/>
@@ -16,12 +16,15 @@
 	<section name="FatJarPackageWizard">
 		<item value="C:\Users\Michael\Documents\GitHub\Final_Year_Project" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="Main (1) - Final Year Project" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="F:\Understanding your Routes v1.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="C:\Users\Michael\Desktop\Understanding your Routes v1.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
-		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<item value="2" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
-			<item value="F:\Understanding your Routes v1.jar"/>
 			<item value="C:\Users\Michael\Desktop\Understanding your Routes v1.jar"/>
+			<item value="C:\Users\Michael\Desktop\Understanding your routes\Understanding your Routes v1.jar"/>
+			<item value="F:\New folder\Understanding your routes.zip"/>
+			<item value="F:\UYR\Understanding your Routes v1.jar"/>
+			<item value="F:\New folder\Understanding your Routes v1.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
 			<item value="C:\Users\Michael\Documents\GitHub\Final_Year_Project.xml"/>

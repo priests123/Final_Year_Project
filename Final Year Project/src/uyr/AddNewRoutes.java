@@ -133,7 +133,6 @@ public class AddNewRoutes {
 				a+=2;
 			}
 		}
-
 		for(int m = 0; m < uniqueRoutesInFile.size(); m+=0){
 			String currRouteName = uniqueRoutesInFile.get(m);
 			String currRouteStops = uniqueRoutesInFile.get(m+1);
@@ -141,7 +140,6 @@ public class AddNewRoutes {
 			{
 				uniqueRoutesInFile.remove(uniqueRoutesInFile.get(m+1));
 				uniqueRoutesInFile.remove(uniqueRoutesInFile.get(m));
-				//System.out.println("REMOVED");
 			}else{
 				m+=2;
 			}
@@ -152,14 +150,9 @@ public class AddNewRoutes {
 						//ArrayList<String> two = new ArrayList<String>();
 						List<String> val = Arrays.asList(allRoutes.get(b+1).split("\\s*,\\s*"));
 						loc.addAll(val);
-						//System.out.println("YES");
-						//System.out.println(currRouteStops);
-						//System.out.println(val);
 						break;
 					}
 				}
-				
-				
 				ArrayList<String> currStation = new ArrayList<String>();
 				String currList = "";
 				for(int f = 0; f < loc.size(); f++){	
@@ -169,9 +162,7 @@ public class AddNewRoutes {
 					currRoute.addAll(val);
 					currList = currList + currStation.get(f);
 						if(currRouteStops.indexOf(currList)== -1){
-							//System.out.println("CHEANGED   " + currRoute.get(f));
 							String newName = currRoute.get(0) + " to " + currRoute.get(currRoute.size()-1) + " via " + currRoute.get(f);
-							//System.out.println(currList);
 							if(Collections.frequency(allRoutes, newName) > 0){
 								String newName2 = currRoute.get(0) + " to " + currRoute.get(currRoute.size()-1) + " via " + currRoute.get(f+1);
 								if(Collections.frequency(allRoutes, newName2) > 0 || uniqueRoutesInFile.contains(newName2)){
@@ -191,21 +182,6 @@ public class AddNewRoutes {
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		SQLDatabase.addNewRoutes(uniqueRoutesInFile, "INSERT INTO Route (Route_Name, Route_Listed) VALUES (?, ?)");
 		return SQLDatabase.selectAllFromRoute("SELECT Route_ID, Route_Name, Route_Listed FROM Route", 3);
 	}

@@ -27,7 +27,7 @@ public class ImportSummaryGUI {
 		if(width >= 1920){		
 			W =(width/2) - (width/8);
 		}else{
-			W = 700;
+			W = 740;
 		}
 		
 		rootWindow.setSize(W, H);

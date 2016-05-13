@@ -65,6 +65,19 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "sqljdbc4",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "da6229555f7228870e249b188775d676d98932d3",
+    "jarFileModificationDate": "2015-11-03T17:12:40Z",
+    "location": "F:\\New folder\\Microsoft JDBC Driver 6.0 for SQL Server\\sqljdbc_6.0\\enu\\sqljdbc4.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
